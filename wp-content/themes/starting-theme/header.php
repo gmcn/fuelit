@@ -26,49 +26,65 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'starting-theme' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<?php
-			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-			endif;
+	<header>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-6 site-branding">
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
-			endif; ?>
-		</div><!-- .site-branding -->
+					<!-- Use any element to open/show the overlay navigation menu -->
+					<span class="open" onclick="openNav()">
+            <img class="hamburger" src="<?php echo get_template_directory_uri(); ?>/images/hamburger-menu.svg" />
+          </span>
 
-		<!-- Static navbar -->
-	      <nav class="navbar navbar-default">
-	        <div class="container-fluid">
-	          <div class="navbar-header">
-	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	              <span class="sr-only">Toggle navigation</span>
-	              <span class="icon-bar"></span>
-	              <span class="icon-bar"></span>
-	              <span class="icon-bar"></span>
-	            </button>
-	          </div>
-	            <?php wp_nav_menu( array(
-								'theme_location' => 'menu-1',
-								'menu_id' => 'navbar',
-								'container_id' => 'navbar',
-								'container_class' => 'navbar-collapse collapse',
-								'menu_class' => 'navbar-collapse',
-								'items_wrap' => '<ul id="" class="nav navbar-nav navbar-right">%3$s</ul>' ) );
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/fuelit-logo_white.svg" alt="<?php bloginfo( 'name' ); ?> | <?php get_bloginfo( 'description', 'display' ); ?>" /></a>
+				</div>
+				<div class="col-xs-6 support">
+
+					<a href="https://get.teamviewer.com/tdq85xc" target="_blank"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/support-icon.png" alt="Live Support">Live <span>Support</span></a>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- The overlay -->
+			<div id="myNav" class="overlay">
+
+			  <!-- Button to close the overlay navigation -->
+			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+			  <!-- Overlay content -->
+			  <div class="container overlay-content">
+
+					<div class="row">
+
+						<div class="col-md-6">
+							<h3>Main Navigation</h3>
+							<?php wp_nav_menu( array(
+								'theme_location' => 'menu-1' ) );
 								?>
-	            <ul class="nav navbar-nav navbar-right">
-	              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-	              <li><a href="../navbar-static-top/">Static top</a></li>
-	              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-	            </ul>
-	        </div><!--/.container-fluid -->
-	      </nav><!-- #site-navigation -->
+						</div>
+
+						<div class="col-xs-6 col-md-3">
+							<h3>Contact Us</h3>
+							Head Office:<br />
+							T: +44 (0)28 3839 3839
+						</div>
+
+						<div class="col-xs-6 col-md-3">
+							<h3>Search & Social</h3>
+							<form action="/" method="get">
+						    <input type="text" name="s" id="search" value="<?php the_search_query(); ?>" />
+							</form>
+							<a href="https://www.linkedin.com/company/micro-computer-solutions-mcs-/?trk=top_nav_home" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/linkedin.svg" alt="Follow Fuel IT on Linkedin"></a>
+							<a href="https://twitter.com/itfuel" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter.svg" alt="Follow Fuel IT on Twitter"></a>
+							<a href="https://www.facebook.com/ITFuel/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.svg" alt="Follow Fuel IT on Facebook"></a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

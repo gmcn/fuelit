@@ -147,21 +147,21 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/jetpack.php';
 
 
-//add data-toggle class and dropdown-toggle to parent anchor link
-function addanchorlink_class($menu) {
-    $menu = preg_replace('/ href="#"/','/ href="#" class="dropdown-toggle" data-toggle="dropdown" /',$menu);
-    return $menu;
-}
+// //add data-toggle class and dropdown-toggle to parent anchor link
+// function addanchorlink_class($menu) {
+//     $menu = preg_replace('/ href="#"/','/ href="#" class="dropdown-toggle" data-toggle="dropdown" /',$menu);
+//     return $menu;
+// }
+//
+// add_filter('wp_nav_menu','addanchorlink_class');
+//
+// //replace child ul class
+// function new_submenu_class($menu) {
+//     $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu" /',$menu);
+//     return $menu;
+// }
 
-add_filter('wp_nav_menu','addanchorlink_class');
-
-//replace child ul class
-function new_submenu_class($menu) {
-    $menu = preg_replace('/ class="sub-menu"/','/ class="dropdown-menu" /',$menu);
-    return $menu;
-}
-
-add_filter('wp_nav_menu','new_submenu_class');
+// add_filter('wp_nav_menu','new_submenu_class');
 
 // Make the search to index custom
 /**
