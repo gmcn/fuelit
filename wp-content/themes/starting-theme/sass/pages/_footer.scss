@@ -1,8 +1,71 @@
 footer {
   background: #000;
-  padding: 5px;
+  padding: 50px 0 15px 0;
   color: #fff;
+  .footer-branding {
+    text-align: left
+  }
+  .logo {
+    max-height: 125px;
+  }
+  h4 {
+    font-weight: 700;
+    font-size: 14px;
+  }
   a {
-    color: pink
+    color: #fff !important;
+    transition: .5s;
+  }
+  a:hover {
+    color: #00A3E6 !important;
+    text-decoration: none;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+    }
+    a {
+      color: #fff !important;
+      transition: .5s;
+      font-size: 12px;
+    }
+    a:hover {
+      color: #00A3E6 !important;
+      text-decoration: none;
+    }
+  }
+  .signature {
+    margin-top: 50px;
+    .copyright {
+      span {
+        font-weight: 700;
+      }
+    }
+    .policy {
+      a {
+        display: inline-block;
+        text-align: left;
+        width: 45%;
+      }
+    }
+    img {
+      max-width: 25px;
+      float: right;
+      margin-right: 3px;
+    }
+    a.support {
+      color: #00A3E6 !important;
+      padding: 8px 10px;
+      transition: .5s;
+      text-decoration: none;
+      span {
+        font-weight: 700;
+      }
+      &:hover {
+        color: #fff !important;
+      }
+    }
   }
 }
