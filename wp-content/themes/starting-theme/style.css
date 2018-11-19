@@ -811,6 +811,8 @@ footer {
     margin-top: 50px; }
     footer .signature .copyright span {
       font-weight: 700; }
+    footer .signature .byline a {
+      font-weight: 700; }
     footer .signature .policy a {
       display: inline-block;
       text-align: left;

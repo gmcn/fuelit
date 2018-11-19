@@ -49,7 +49,7 @@
 								?>
 						</div>
 						<div class="col-md-2">
-							<h4><a href="#">PRODUCT PORTFOLIO</a></h4>
+							<h4><a href="/products">PRODUCT PORTFOLIO</a></h4>
 						</div>
 						<div class="col-md-2">
 							<h4><a href="#">NEWS & EVENTS</a></h4>
@@ -69,8 +69,8 @@
 							<a href="privacy-policy">Privacy Policy</a>
 							<a href="cookies">Cookies</a>
 						</div>
-						<div class="col-md-2 col-md-offset-4">
-							Website by Cornell
+						<div class="col-md-2 col-md-offset-4 byline">
+							Website by <a href="https://www.cornellstudios.com" target="_blank">Cornell</a>
 						</div>
 						<div class="col-md-3 col-md-offset-1">
 							<a class="support" href="https://get.teamviewer.com/tdq85xc" target="_blank">LIVE <span>SUPPORT</span></a>
