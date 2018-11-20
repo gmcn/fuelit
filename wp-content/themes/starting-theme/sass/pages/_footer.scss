@@ -38,6 +38,12 @@ footer {
   }
   .signature {
     margin-top: 50px;
+    .contact {
+      a {
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
     .copyright {
       span {
         font-weight: 700;

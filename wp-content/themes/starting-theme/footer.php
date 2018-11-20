@@ -72,7 +72,10 @@
 						<div class="col-md-2 col-md-offset-4 byline">
 							Website by <a href="https://www.cornellstudios.com" target="_blank">Cornell</a>
 						</div>
-						<div class="col-md-3 col-md-offset-1">
+						<div class="col-md-2 contact">
+							<a href="/contact">Contact Us</a>
+						</div>
+						<div class="col-md-2">
 							<a class="support" href="https://get.teamviewer.com/tdq85xc" target="_blank">LIVE <span>SUPPORT</span></a>
 							<a href="https://www.linkedin.com/company/micro-computer-solutions-mcs-/?trk=top_nav_home" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/linkedin.svg" alt="Follow Fuel IT on Linkedin"></a>
 							<a href="https://twitter.com/itfuel" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter.svg" alt="Follow Fuel IT on Twitter"></a>
