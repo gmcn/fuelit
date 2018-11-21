@@ -1,0 +1,144 @@
+.front-wrapper {
+  .row-two {
+    .contact {
+      background: #000F23;
+      color: #fff;
+      min-height: 300px;
+      @include md {
+        width: calc(39% - 2px) !important;
+      }
+      overflow: hidden;
+      .dots {
+        opacity: 0;
+        transition: .5s;
+        margin-bottom: 20px;
+      }
+      a {
+        position: absolute;
+        top: 60%;
+        @include md {
+          top: 70%;
+        }
+        left: 30px;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1em;
+        color: #fff;
+        text-transform: uppercase;
+        transition: .5s;
+        &:hover {
+          text-decoration: none;
+          color: #000 !important;
+          }
+      }
+      a:hover {
+        color: #00A3E6 !important;
+      }
+      p {
+        position: absolute;
+        top: 84%;
+        @include md {
+          top: 105%;
+        }
+        // font-weight: 700;
+        line-height: 1em;
+        transition: .5s;
+        left: 30px;
+        right: 30px;
+      }
+      &:hover {
+        .dots {
+          opacity: 1;
+        }
+        a {
+          position: absolute;
+          top: 60%;
+          font-weight: 700;
+          line-height: 1em;
+        }
+        p {
+          display: block;
+          top: 84%;
+        }
+      }
+    }
+    .casestudies {
+      padding: 0;
+      @include md {
+        width: calc(61% + 2px) !important;
+      }
+      .overlay {
+        position: relative;
+        line-height: 1em;
+        width: 50%;
+        height: 300px;
+        @include md {
+          height: 100%;
+          width: calc(32% - 2px);
+        }
+        background: rgba(255, 255, 255, .5);
+        // background: rgb(0,0,0);
+        // background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        color: #000;
+        padding: 30px;
+        font-size: 18px;
+        text-transform: uppercase;
+        a {
+          position: absolute;
+          left: 30px;
+          font-size: 18px;
+          line-height: 1em;
+          color: #000;
+          top: 25px;
+          font-weight: 700;
+          text-transform: uppercase;
+          transition: .5s;
+          @include md {
+            width: 50%;
+          &:hover {
+            text-decoration: none;
+            color: #00A3E6;
+            }
+          }
+        }
+        a.studies {
+          position: absolute;
+          top: 80%;
+          font-weight: 700;
+          line-height: 1em;
+        }
+      }
+      .bx-wrapper, .bx-viewport {
+        height: 100% !important;
+        ul, li {
+          margin: 0;
+          padding: 0;
+          height: 100% !important;
+        }
+      }
+      .bx-controls {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        .bx-pager-item {
+          float: left;
+          padding: 0 10px 10px 10px;
+          font-weight: 400;
+          a {
+            color: #000;
+            font-size: 18px;
+            font-weight: 300;
+          }
+          a:hover {
+            text-decoration: none;
+          }
+        }
+        .bx-pager-item:before {
+          content: "#0";
+          font-size: 18px;
+        }
+      }
+
+    }
+  }
+}

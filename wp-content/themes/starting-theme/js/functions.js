@@ -1,11 +1,32 @@
 ( function($) {
 
+  $('.slider_ambassador').bxSlider({
+  auto: false,
+  autoStart: true,
+  speed: 1000,
+  autoControls: false,
+  stopAutoOnClick: false,
+  pager: false,
+  controls: false,
+  });
+
+  $('.slider_casestudies').bxSlider({
+  auto: false,
+  autoStart: true,
+  speed: 1000,
+  autoControls: false,
+  stopAutoOnClick: false,
+  pager: true,
+  controls: false,
+  });
+
+
   /**
    * Match Height (Including Safari onload fix)
    */
   function startMatchHeight() {
     $('.matchheight').matchHeight();
-    $('.featureheight').matchHeight();
+    $('.partnerheight').matchHeight();
   }
   window.onload = startMatchHeight;
 

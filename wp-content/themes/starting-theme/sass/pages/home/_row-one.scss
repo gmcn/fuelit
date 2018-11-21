@@ -1,0 +1,139 @@
+.front-wrapper {
+  .row {
+    height: 100%;
+  }
+  .row-one {
+    .col-md-12 {
+      min-height: 300px;
+      transition: .5s;
+      @include md {
+        min-height: 0;
+      }
+    }
+    .col-md-4 {
+      min-height: 300px;
+      @include md {
+        min-height: 0;
+      }
+    }
+    .products {
+      .dots {
+        opacity: 0;
+        transition: .5s;
+        margin-bottom: 20px;
+      }
+      a {
+        position: absolute;
+        left: 30px;
+        font-size: 18px;
+        line-height: 1em;
+        color: #fff;
+        top: 60%;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: .5s;
+        width: 50%;
+        @include md {
+        width: 30%;
+        &:hover {
+          text-decoration: none;
+          color: #000 !important;
+          }
+        }
+      }
+      p {
+        position: absolute;
+        top: 84%;
+        @include md {
+          top: 105%;
+        }
+        // font-weight: 700;
+        line-height: 1em;
+        transition: .5s;
+        left: 30px;
+      }
+    }
+    .products:first-of-type {
+      a {
+        position: absolute;
+        left: 30px;
+        font-size: 18px;
+        line-height: 1em;
+        color: #fff;
+        top: 70%;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: .5s;
+        width: 50%;
+        @include md {
+        width: 30%;
+        &:hover {
+          text-decoration: none;
+          color: #000 !important;
+          }
+        }
+      }
+      p {
+        position: absolute;
+        top: 84%;
+        color: #fff;
+        @include md {
+          top: 105%;
+        }
+        // font-weight: 700;
+        line-height: 1em;
+        transition: .5s;
+        left: 30px;
+      }
+    }
+    .products:hover {
+      .dots {
+        opacity: 1;
+      }
+      a {
+        top: 50%;
+      }
+      p {
+        top: 84%;
+      }
+    }
+  }
+
+  .ambassador {
+    padding: 0;
+    @include md {
+      min-height: 600px;
+    }
+    position: relative;
+    .bx-wrapper, .bx-viewport {
+      height: 100% !important;
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .overlay {
+      margin-left: -15px;
+      position: relative;
+      line-height: 1em;
+      width: calc(50% + 15px);
+      height: 300px;
+      @include md {
+        height: 100%;
+      }
+      background: rgba(0, 0, 0, .5);
+      // background: rgb(0,0,0);
+      // background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+      color: #fff;
+      padding: 30px;
+      font-size: 18px;
+      text-transform: uppercase;
+      p {
+        position: absolute;
+        top: 84%;
+        font-weight: 700;
+        line-height: 1em;
+      }
+    }
+  }
+}

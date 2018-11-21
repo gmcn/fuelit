@@ -14,36 +14,16 @@
 
 get_header(); ?>
 
-gary mcnally
+<?php
 
-<div class="callout-card">
-	<div class="v-align">
-		Gary
-	</div>
+include(locate_template("inc/page-front/hero.php"));
+include(locate_template("inc/page-front/row-one.php"));
+include(locate_template("inc/page-front/row-two.php"));
+include(locate_template("inc/page-front/row-three.php"));
+include(locate_template("inc/page-front/row-four.php"));
 
-</div>
-
-
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-			<?php
-			while ( have_posts() ) : the_post();
-
-				get_template_part( 'template-parts/content', 'page' );
-
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
-
-			endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+?>
 
 <?php
-get_sidebar();
+//get_sidebar();
 get_footer();
