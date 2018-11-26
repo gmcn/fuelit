@@ -1,3 +1,11 @@
+.hero {
+  background: #000;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
 .front-wrapper {
   .row {
     height: 100%;
@@ -17,6 +25,7 @@
       }
     }
     .products {
+      overflow: hidden;
       .dots {
         opacity: 0;
         transition: .5s;
