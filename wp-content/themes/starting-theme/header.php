@@ -87,4 +87,4 @@
 
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+	<div id="content" <?php if ( !is_front_page() ) : ?> class="site-content" <?php endif; ?>>

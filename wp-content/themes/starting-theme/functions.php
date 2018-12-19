@@ -346,6 +346,12 @@ function case_studies_taxonomies()
 //
 // }
 
+function cc_mime_types($mimes) {
+ $mimes['svg'] = 'image/svg+xml';
+ return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
 add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_deregister_style( 'contact-form-7' );

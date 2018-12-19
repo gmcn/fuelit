@@ -213,7 +213,9 @@ input[type="search"] {
 // horizontal forms, use the predefined grid classes.
 
 .form-group {
-  margin-bottom: $form-group-margin-bottom;
+  @include md {
+    margin-bottom: $form-group-margin-bottom;  
+  }
 }
 
 

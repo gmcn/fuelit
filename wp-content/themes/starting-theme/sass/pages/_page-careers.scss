@@ -1,0 +1,295 @@
+.careers {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  .career {
+    border-bottom: 2px solid;
+    border-color: rgba(26, 45, 51, .3);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .overlay {
+      background-color: rgba(172, 33, 83, 1);
+      .closebtn:hover {
+        color: #E83978;
+      }
+    }
+    &__count {
+      font-size: 85px;
+      color: rgba(82, 92, 101, .2);
+      font-weight: 700;
+    }
+    &__closing {
+      @include md {
+        position: absolute;
+        bottom: 0;
+      }
+      font-weight: 400;
+      font-size: 33px;
+      padding: 0;
+      margin: 0;
+      span {
+        display: block;
+        color: rgba(82, 92, 101, .4);
+        font-weight: 700;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+    }
+    &__title {
+      h2 {
+        font-weight: 700;
+        color: #525C65;
+        font-size: 30px;
+        @include md {
+          font-size: 55px;
+          width: 50%;
+        }
+        line-height: 1em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      p {
+        color: #525C65;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+      }
+    }
+    &__details {
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+    .buttons {
+      @include md {
+        position: absolute;
+        bottom: 0;
+      }
+      a {
+        float: left;
+        background: #E83978;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        color: #fff;
+        transition: .5s;
+        border-radius: 5px;
+        margin-right: 7.5px;
+        font-weight: 700;
+        &:hover {
+          background: #000;
+          text-decoration: none;
+        }
+      }
+    }
+    .modal-content {
+      background: #AC2153;
+      color: #fff;
+      border-radius: 0;
+    }
+    .wpcf7-submit {
+      float: right;
+      font-size: 14px;
+      background: #E83978;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      color: #fff;
+      transition: .5s;
+      border-radius: 5px;
+      margin-right: 7.5px;
+      font-weight: 700;
+      &:hover {
+        background: #000;
+        text-decoration: none;
+      }
+      button.close {
+        color: #fff !important;
+      }
+    }
+  }
+
+  .label {
+    margin-bottom: 7.5px;
+    display: block;
+    color: rgba(82, 92, 101, .4);
+    font-weight: 700;
+    font-size: 15px !important;
+    text-align: left;
+    padding: 0;
+    font-size: 100%;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: none;
+  }
+ input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], textarea {
+    width: 100%;
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 0;
+    font-weight: 700;
+    padding: 10px;
+  }
+  .modal-body label {
+    font-weight: 700;
+  }
+  input[type="file"] {
+    border: 0;
+  }
+}
+
+.career-single {
+  background: url(images/jellyfish_contact_transparent.png) #AC2153;
+  background-size: cover;
+  color: #fff;
+  @include md {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .career {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .overlay {
+      background-color: rgba(172, 33, 83, 1);
+      .closebtn:hover {
+        color: #E83978;
+      }
+    }
+    &__count {
+      font-size: 85px;
+      color: rgba(255, 255, 255, .2);
+      font-weight: 700;
+    }
+    &__closing {
+      font-weight: 400;
+      font-size: 33px;
+      padding: 0;
+      margin: 0;
+      span {
+        display: block;
+        color: rgba(255, 255, 255, .4);
+        font-weight: 700;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+    }
+    &__title {
+      h2 {
+        font-weight: 700;
+        color: #fff;
+        font-size: 30px;
+        @include md {
+          font-size: 55px;
+          width: 50%;
+        }
+        line-height: 1em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      p {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+      }
+    }
+    &__details {
+      font-size: 25px;
+      text-transform: uppercase;
+      .content {
+        text-transform: none;
+        padding-top: 75px;
+        font-size: 15px;
+        ul {
+          margin: 10px 10px 25px 0;
+        }
+      }
+    }
+    .buttons {
+      @include md {
+        position: absolute;
+        bottom: 0;
+      }
+      a {
+        float: left;
+        background: #E83978;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        color: #fff;
+        transition: .5s;
+        border-radius: 5px;
+        margin-right: 7.5px;
+        font-weight: 700;
+        &:hover {
+          background: #000;
+          text-decoration: none;
+        }
+      }
+    }
+    .modal-content {
+      background: #AC2153;
+      color: #fff;
+      border-radius: 0;
+    }
+    .wpcf7-submit {
+      float: right;
+      font-size: 14px;
+      background: #E83978;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      color: #fff;
+      transition: .5s;
+      border-radius: 5px;
+      margin-right: 7.5px;
+      font-weight: 700;
+      &:hover {
+        background: #000;
+        text-decoration: none;
+      }
+      button.close {
+        color: #fff !important;
+      }
+    }
+    &__right {
+      border-left: 1px solid;
+      border-color: rgba(26, 45, 51, .15);
+      p:first-of-type {
+        @include md {
+          margin-bottom: 225px;
+        }
+      }
+    }
+  }
+
+  .label {
+    margin-bottom: 7.5px;
+    display: block;
+    color: rgba(255, 255, 255, .4);
+    font-weight: 700;
+    font-size: 15px !important;
+    text-align: left;
+    padding: 0;
+    font-size: 100%;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: none;
+  }
+ input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], textarea {
+    width: 100%;
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 0;
+    font-weight: 700;
+    padding: 10px;
+  }
+  .modal-body label {
+    font-weight: 700;
+  }
+  input[type="file"] {
+    border: 0;
+  }
+}

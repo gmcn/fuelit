@@ -27,6 +27,7 @@
   function startMatchHeight() {
     $('.matchheight').matchHeight();
     $('.partnerheight').matchHeight();
+    $('.careermatch').matchHeight();
   }
   window.onload = startMatchHeight;
 

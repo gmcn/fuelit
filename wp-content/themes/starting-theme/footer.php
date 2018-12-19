@@ -43,7 +43,7 @@
 								?>
 						</div>
 						<div class="col-md-2">
-							<h4>WHY COME TO FUEL</h4>
+							<h4><a href="/why-come-to-fuel/">WHY COME TO FUEL</a></h4>
 							<?php wp_nav_menu( array(
 								'theme_location' => 'footer-4' ) );
 								?>

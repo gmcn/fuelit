@@ -23,12 +23,12 @@ header {
     img.logo {
       height: 72px;
       position: relative;
-      z-index: 99999;
+      z-index: 999;
     }
     img.hamburger {
       height: 25px;
       @include md {
-        margin-left: 40px;
+        margin-left: 20px;
       }
       margin-right: 20px;
       z-index: 1;
@@ -39,7 +39,7 @@ header {
     text-align: right;
     font-weight: 300;
     padding-top: 20px;
-    z-index: 99999;
+    z-index: 999;
     a {
       background: #00A3E6;
       margin-right: -15px;
@@ -90,7 +90,7 @@ span.open {
     @include md {
     font-size: 16px;
     }
-    input {
+    input#search {
       background: #fff url(images/mag-glass.png) no-repeat 5px 50%;
       margin-bottom: 15px;
       padding-left: 30px;
@@ -179,7 +179,7 @@ span.open {
     top: 30px;
     left: 10px;
     @include md {
-      left: 50px;
+      left: 30px;
     }
     font-size: 80px;
     line-height: 40px;

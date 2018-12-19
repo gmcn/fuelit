@@ -28,7 +28,7 @@
         <a href="<?php echo the_permalink(); ?>">
           <img src="<?php echo get_template_directory_uri() ?>/images/view.svg" alt="View <?php the_title() ?>">
         </a>
-        <p><?php the_title(); ?></p>
+        <p><?php echo wp_trim_words( get_the_title(), 10, '...' ); ?></p>
       </div>
   	<?php $i++; endwhile; ?>
   	<!-- end of the loop -->

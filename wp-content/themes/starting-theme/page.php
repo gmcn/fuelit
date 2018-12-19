@@ -14,6 +14,30 @@
 
 get_header(); ?>
 
+<?php
+
+  include(locate_template("inc/page-elements/title.php"));
+
+if (is_page( 'join-the-team' )) :
+
+  include(locate_template("inc/page-careers/child.php"));
+
+endif;
+
+if ($post->post_parent == '142') :
+
+include(locate_template("inc/page-careers/content.php"));
+
+endif;
+
+if ($post->post_parent == '398') :
+
+include(locate_template("inc/page-about/person.php"));
+
+endif;
+
+?>
+
 
 
 <?php

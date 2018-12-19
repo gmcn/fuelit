@@ -1,3 +1,13 @@
+.site-content {
+  .container-fluid {
+    @include md {
+      padding-left: 35px !important;
+      padding-right: 35px !important;
+    }
+  }
+}
+
+
 .title {
   background-color: #000;
   padding-top: 40px;
