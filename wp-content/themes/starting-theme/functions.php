@@ -115,6 +115,8 @@ function starting_theme_scripts() {
 	wp_enqueue_style( 'starting-theme-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), '1.12.4', true );
 	wp_enqueue_script( 'starting-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/jquery.fancybox.js', array(), '2.1.7', true );
+	wp_enqueue_script( 'fancybox-pack', get_template_directory_uri() . '/js/jquery.fancybox.pack.js', array(), '2.1.7', true );
 	wp_enqueue_script( 'bxslider-js', get_template_directory_uri() . '/js/jquery.bxslider.min.js', array(), '4.2.12', true );
 	wp_enqueue_script( 'functions-js', get_template_directory_uri() . '/js/functions.js', array(), '0.1', true );
 	wp_enqueue_script( 'wow-js', get_template_directory_uri() . '/js/wow.min.js', array(), '0.1', true );
@@ -201,6 +203,19 @@ function cf_search_where( $where ) {
     return $where;
 }
 add_filter( 'posts_where', 'cf_search_where' );
+
+/**
+ * Prevent duplicates
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_distinct
+ */
+function cf_search_distinct( $where ) {
+    global $wpdb;
+    if ( is_search() ) {
+        return "DISTINCT";
+    }
+    return $where;
+}
+add_filter( 'posts_distinct', 'cf_search_distinct' );
 
 /**
  * Code to add the custom login css file to the theme
@@ -301,50 +316,6 @@ function case_studies_taxonomies()
     'rewrite' => array( 'slug' => 'tag' ),
   ));
 }
-
-// add_action( 'init', 'case_studies_taxonomies', 0 );
-//
-// function case_studies_taxonomies() {
-//
-//     // Product Type Taxonomy
-//     $product_cat_labels = array(
-//         'name'          => 'Case Study Category',
-//         'singular_name' => 'Case Study Category',
-//         'menu_name'     => 'Case Studies'
-//     );
-//
-//     $product_cat_args = array(
-//         'labels'                     => $product_cat_labels,
-//         'hierarchical'               => true,
-//         'public'                     => true,
-//         'show_ui'                    => true,
-//         'show_admin_column'          => true,
-//         'show_in_nav_menus'          => true,
-//         'show_tagcloud'              => true,
-//         'rewrite'                    => array('pages' => true)
-//     );
-//     register_taxonomy( 'case_studies_category', array( 'case_studies' ), $product_cat_args );
-//
-// 		// Product Type Taxonomy
-//     $product_type_labels = array(
-//         'name'          => 'Case Study Type',
-//         'singular_name' => 'Case Study Type',
-//         'menu_name'     => 'Case Study Types'
-//     );
-//
-//     $product_type_args = array(
-//         'labels'                     => $product_type_labels,
-//         'hierarchical'               => true,
-//         'public'                     => true,
-//         'show_ui'                    => true,
-//         'show_admin_column'          => true,
-//         'show_in_nav_menus'          => true,
-//         'show_tagcloud'              => true,
-//         'rewrite'                    => array('pages' => true)
-//     );
-//     register_taxonomy( 'case_studies_type', array( 'case_studies' ), $product_type_args );
-//
-// }
 
 function cc_mime_types($mimes) {
  $mimes['svg'] = 'image/svg+xml';

@@ -11,26 +11,32 @@ $child_query = new WP_Query( $args ); ?>
 
   <?php if ($child_query->have_posts()) : ?>
 
-    <div class="container-fluid">
+    <div class="container-fluid about-parent">
       <div class="row">
 
-        <?php while ($child_query->have_posts()) : $child_query->the_post();
+        <?php $i = 1; while ($child_query->have_posts()) : $child_query->the_post();
 
         $job_role = get_field('job_role');
         $menu_order = get_post_field( 'menu_order', $post->ID);
 
          ?>
 
-          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 wow fadeInLeft" style="color: <?php echo $pageColour ?>">
-            #<?php echo $menu_order ?>
-            <h2>
+          <div class="col-sm-6 col-md-4 col-lg-2 about-sub wow fadeInLeft matchheight" style="color: <?php echo $pageColour ?>">
+            <span class="counter">#<?php echo $menu_order ?></span>
+            <h2 class="matchheading">
               <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="color: <?php echo $pageColour ?>"><?php the_title(); ?></a>
             </h2>
             <p><?php echo $job_role ?></p>
-            <?php echo the_post_thumbnail('medium'); ?>
+            <div class="matchimg">
+              <div class="vert-align">
+                <?php echo the_post_thumbnail('medium'); ?>
+              </div>
+              <div class="clear"></div>
+            </div>
+
           </div>
 
-        <?php endwhile; ?>
+        <?php $i++; endwhile; ?>
 
       </div>
     </div>

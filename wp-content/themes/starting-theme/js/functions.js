@@ -28,8 +28,14 @@
     $('.matchheight').matchHeight();
     $('.partnerheight').matchHeight();
     $('.careermatch').matchHeight();
+    $('.matchheading').matchHeight();
+    // $('.matchimg').matchHeight();
   }
   window.onload = startMatchHeight;
+
+  $(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
 
 } ) (jQuery);
 

@@ -12,10 +12,9 @@ get_header(); ?>
 <?php
 
 	include(locate_template("inc/page-elements/title.php"));
+	include(locate_template("inc/page-blog/single.php"));
 
 	?>
-
-	<?php the_content(); ?>
 
 
 <?php

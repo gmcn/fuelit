@@ -1,3 +1,61 @@
+.about-parent {
+  background: url('images/about-parent_bg@2x.jpg') center center;
+  background-size: cover;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  .about-sub {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    @include lg {
+      border-right: 2px solid #fff;
+    }
+  }
+  .about-sub:last-of-type {
+    border-right: none;
+  }
+  span.counter {
+    color: #fff;
+    font-weight: 200;
+    font-size: 30px;
+  }
+  h2, a {
+    color: #fff;
+    font-weight: 200;
+    text-transform: capitalize;
+    font-size: 30px;
+    transition: .5s;
+    margin-bottom: 25px;
+    span {
+      font-weight: 700;
+    }
+  }
+  a:hover {
+    text-decoration: none;
+    color: #000;
+  }
+  .matchimg {
+    position: relative;
+    min-height: 200px;
+    .vert-align {
+      @include md {
+        position: absolute;
+        top: 50%;
+        width: calc(100% - 30px);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+  img {
+    max-height: 225px;
+    max-width:  225px;
+  }
+}
+
 .about {
   padding: 25px 0;
   @include md {
