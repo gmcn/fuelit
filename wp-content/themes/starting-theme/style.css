@@ -1859,6 +1859,146 @@ footer {
     padding-right: 0;
     padding-left: 0; }
 
+.container-fluid.casestudies, .container-fluid.casestudies__single {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.casestudies .filter {
+  background: #C73F6E; }
+  .casestudies .filter img {
+    width: 18px;
+    margin-left: 5px; }
+  .casestudies .filter a {
+    text-transform: uppercase;
+    font-weight: 300;
+    transition: .5s;
+    color: #fff; }
+  .casestudies .filter .dropdown-menu a {
+    text-transform: none;
+    color: #000; }
+  .casestudies .filter__wrapper {
+    background-color: #C73F6E;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5); }
+    @media screen and (min-width: 992px) {
+      .casestudies .filter__wrapper {
+        float: left; } }
+  .casestudies .filter__wrapper:first-of-type {
+    background-color: rgba(0, 0, 0, 0.75); }
+  .casestudies .filter__wrapper:last-of-type {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 18px;
+    height: 53px;
+    background-color: transparent; }
+    .casestudies .filter__wrapper:last-of-type a {
+      font-weight: 700;
+      transition: .5s; }
+    .casestudies .filter__wrapper:last-of-type a:hover {
+      text-decoration: none;
+      color: #000; }
+.casestudies .row {
+  margin-left: 0;
+  margin-right: 0; }
+.casestudies .col-md-6 {
+  padding-left: 0;
+  padding-right: 0; }
+.casestudies__post {
+  height: 350px;
+  text-align: left;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  position: relative; }
+  .casestudies__post__wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0; }
+    .casestudies__post__wrapper h2 {
+      color: #fff;
+      font-weight: 700;
+      margin-top: 15%;
+      padding-left: 25px; }
+    .casestudies__post__wrapper a {
+      color: #fff;
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      transition: .5s; }
+    .casestudies__post__wrapper a:hover {
+      text-decoration: none;
+      color: #1ca4e3; }
+.casestudies .pagi {
+  background: #CDD1D3;
+  padding: 10px; }
+  .casestudies .pagi a {
+    color: #fff; }
+
+.casestudies__single__title__wrapper {
+  padding: 0 15px;
+  color: #fff;
+  font-weight: 700;
+  height: 300px; }
+  @media screen and (min-width: 992px) {
+    .casestudies__single__title__wrapper {
+      height: 600px; } }
+  .casestudies__single__title__wrapper .row, .casestudies__single__title__wrapper .col-md-4, .casestudies__single__title__wrapper .col-md-8 {
+    height: 100%; }
+  .casestudies__single__title__wrapper h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    background: #252A2C; }
+    @media screen and (min-width: 992px) {
+      .casestudies__single__title__wrapper h2 {
+        font-size: 32px; } }
+    @media screen and (min-width: 1200px) {
+      .casestudies__single__title__wrapper h2 {
+        font-size: 43px; } }
+.casestudies__single__content__wrapper {
+  padding: 25px 15px;
+  color: #1A2D33; }
+  @media screen and (min-width: 992px) {
+    .casestudies__single__content__wrapper {
+      padding: 50px 75px; } }
+  .casestudies__single__content__wrapper p:first-of-type {
+    font-weight: 700; }
+  .casestudies__single__content__wrapper p {
+    font-size: 16px;
+    margin-bottom: 25px; }
+.casestudies__single .thumbimg a {
+  color: rgba(255, 255, 255, 0.5); }
+.casestudies__single .thumbimg span {
+  position: absolute;
+  bottom: 20px;
+  right: 50px; }
+.casestudies__single .thumbimg img.more {
+  width: 20px;
+  margin-left: 7.5px; }
+.casestudies__single .back {
+  padding: 15px 35px; }
+  .casestudies__single .back img {
+    width: 15px;
+    margin-right: 10px; }
+  .casestudies__single .back a {
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px; }
+.casestudies__single .row.no-gutters {
+  margin-right: 0;
+  margin-left: 0; }
+.casestudies__single .row.no-gutters > [class^="col-"],
+.casestudies__single .row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0; }
+
 .careers {
   padding-top: 50px;
   padding-bottom: 50px; }
