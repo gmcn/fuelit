@@ -288,8 +288,46 @@ add_action( 'init', 'case_studies_taxonomies', 0 );
 //create two taxonomies, genres and tags for the post type "tag"
 function case_studies_taxonomies()
 {
+	// case studies service taxonomy
+    $casestudy_product_labels = array(
+        'name'          => 'Case Study Product',
+        'singular_name' => 'Case Study Product',
+        'menu_name'     => 'Case Study Product'
+    );
+
+    $casestudy_product_args = array(
+        'labels'                     => $casestudy_product_labels,
+        'hierarchical'               => true,
+        'public'                     => true,
+        'show_ui'                    => true,
+        'show_admin_column'          => true,
+        'show_in_nav_menus'          => true,
+        'show_tagcloud'              => true,
+        'rewrite'                    => array('pages' => true)
+    );
+    register_taxonomy( 'case_studies_product', array( 'case_studies' ), $casestudy_product_args );
+
+		// case studies service taxonomy
+	    $casestudy_service_labels = array(
+	        'name'          => 'Case Study Service',
+	        'singular_name' => 'Case Study Service',
+	        'menu_name'     => 'Case Study Service'
+	    );
+
+	    $casestudy_service_args = array(
+	        'labels'                     => $casestudy_service_labels,
+	        'hierarchical'               => true,
+	        'public'                     => true,
+	        'show_ui'                    => true,
+	        'show_admin_column'          => true,
+	        'show_in_nav_menus'          => true,
+	        'show_tagcloud'              => true,
+	        'rewrite'                    => array('pages' => true)
+	    );
+	    register_taxonomy( 'case_studies_service', array( 'case_studies' ), $casestudy_service_args );
+
   // Add new taxonomy, NOT hierarchical (like tags)
-  $labels = array(
+  $casestudy_tags_args = array(
     'name' => _x( 'Tags', 'Case Study' ),
     'singular_name' => _x( 'Tag', 'Case Studies' ),
     'search_items' =>  __( 'Search Tags' ),
@@ -304,12 +342,12 @@ function case_studies_taxonomies()
     'separate_items_with_commas' => __( 'Separate tags with commas' ),
     'add_or_remove_items' => __( 'Add or remove tags' ),
     'choose_from_most_used' => __( 'Choose from the most used tags' ),
-    'menu_name' => __( 'Tags' ),
+    'menu_name' => __( 'Case Study Tags' ),
   );
 
   register_taxonomy('tag','case_studies',array(
     'hierarchical' => false,
-    'labels' => $labels,
+    'labels' => $casestudy_tags_args,
     'show_ui' => true,
     'update_count_callback' => '_update_post_term_count',
     'query_var' => true,
