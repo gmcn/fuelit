@@ -55,3 +55,39 @@
     margin-bottom: 0px;
   }
 }
+
+.call-back {
+  background: #7D8D95;
+  padding: 50px;
+  color: #fff;
+  input.wpcf7-form-control {
+    height: 78px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+  }
+  a {
+    margin-top: 15px;
+    display: inline-block;
+    color: #fff;
+    font-weight: 700;
+  }
+  .consent {
+    margin-top: 15px;
+    text-align: right;
+    font-weight: 300 !important;
+    input {
+      margin-left: 5px;
+      padding: 0;
+    }
+  }
+  .wpcf7-submit {
+    background: #E83978;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    text-transform: uppercase;
+    width: 100%;
+  }
+}

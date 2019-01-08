@@ -1,3 +1,16 @@
+<?php
+
+$company_intro = get_field('company_intro');
+$company_main = get_field('company_main');
+$company_url = get_field('company_url');
+
+$details_challange = get_field('details_challange');
+$details_benefits = get_field('details_benefits');
+$details_solution = get_field('details_solution');
+
+ ?>
+
+
 <div class="container-fluid casestudies__single">
   <div class="row no-gutters">
     <div class="back" style="background: <?php echo $post_colour ?>">
@@ -5,10 +18,10 @@
     </div>
     <div class="casestudies__single__title__wrapper" style="background: url(<?php the_post_thumbnail_url(); ?>) center center; background-size: cover;">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 wow fadeInLeft">
           <h2><?php the_title(); ?></h2>
         </div>
-        <div class="col-md-8 thumbimg">
+        <div class="col-md-8 thumbimg wow fadeInRight">
           <?php if( have_rows('gallery') ): ?>
 
             <a class="fancybox" rel="group" href="<?php the_post_thumbnail_url(); ?>" title="<?php the_title(); ?>">
@@ -23,17 +36,41 @@
 
     </div>
 
-    <div class="col-md-6 matchheight wow fadeInLeft">
-      <div class="blog__single__content__wrapper">
-        <?php the_content(); ?>
-      </div>
-      <div class="back" style="background: <?php echo $post_colour ?>">
-        <a href="/news-events/"><img src="<?php echo get_template_directory_uri() ?>/images/back_btn.svg" alt="Back to News & Events">Back to News & Events</a>
-      </div>
-    </div>
-
-
+    <div class="row no-gutters casestudies__single__content">
+      <div class="col-md-6 intro wow fadeInLeft">
+          <?php echo $company_intro ?>
+      </div><!-- /.col-md-6 -->
+      <div class="col-md-6 main wow fadeInRight">
+        <?php echo $company_main ?>
+        <?php if ($company_url) : ?>
+          <a href="<?php echo $company_url ?>" target="_blank"><?php echo $company_url ?></a>
+        <?php endif; ?>
+      </div><!-- /.col-md-6 -->
+    </div><!-- /.row casestudies__single__content -->
   </div>
+
+  <?php if ($details_challange): ?>
+    <div class="row no-gutters casestudies__single__sub__content wow fadeInUp">
+      <h3><span>#01</span>THE CHALLENGE</h3>
+      <?php echo $details_challange ?>
+    </div><!-- /.row -->
+  <?php endif; ?>
+
+  <?php if ($details_benefits): ?>
+    <div class="row no-gutters casestudies__single__sub__content wow fadeInUp">
+      <h3><span>#02</span>KEY BUSINESS BENEFITS</h3>
+      <?php echo $details_benefits ?>
+    </div><!-- /.row -->
+  <?php endif; ?>
+
+  <?php if ($details_solution): ?>
+    <div class="row no-gutters casestudies__single__sub__content wow fadeInUp">
+      <h3><span>#03</span>SOLUTION</h3>
+      <?php echo $details_solution ?>
+    </div><!-- /.row -->
+  <?php endif; ?>
+
+
 </div>
 
 

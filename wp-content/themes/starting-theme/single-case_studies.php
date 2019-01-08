@@ -13,6 +13,7 @@ get_header(); ?>
 
 	include(locate_template("inc/page-elements/title.php"));
 	include(locate_template("inc/page-casestudies/single.php"));
+	include(locate_template("inc/page-elements/call-back.php"));
 
 	?>
 

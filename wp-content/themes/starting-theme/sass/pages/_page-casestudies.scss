@@ -120,6 +120,7 @@
         padding: 50px;
         @include md {
           font-size: 32px;
+          padding: 50px 75px;
         }
         @include lg {
           font-size: 43px;
@@ -130,18 +131,51 @@
         background: #252A2C;
       }
   }
-  &__content__wrapper {
-    padding: 25px 15px;
-    color: #1A2D33;
+  &__content {
+    padding: 50px;
+    color: #fff;
+    background: #7D8D95;
     @include md {
       padding: 50px 75px;
     }
-    p:first-of-type {
-      font-weight: 700;
+    .intro {
+      font-size: 30px;
+      font-weight: 300;
     }
-    p {
+    .main {
       font-size: 16px;
-      margin-bottom: 25px;
+      a {
+        margin-top: 50px;
+        display: block;
+        color: #fff;
+        font-weight: 700;
+        transition: .5s;
+      }
+      a:hover {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+  &__sub__content {
+    border-top: 1px solid #1A2D33;
+    font-size: 16px;
+    padding: 0 50px 50px 50px;
+    @include md {
+      padding: 0 75px 50px 75px;
+    }
+    h3 {
+      background: #1A2D33;
+      display: inline-block;
+      text-transform: uppercase;
+      margin: 0 0 25px 0;
+      padding: 30px 15px 15px 15px;
+      color: #fff;
+      font-weight: 700;
+      span {
+        display: block;
+        opacity: .5;
+      }
     }
   }
   .thumbimg {
@@ -149,9 +183,11 @@
       color: rgba(255,255,255,.5);
     }
     span {
-      position: absolute;
-      bottom: 20px;
-      right: 50px;
+      @include md {
+        position: absolute;
+        bottom: 20px;
+        right: 50px;
+      }
     }
     img.more {
       width: 20px;
