@@ -8,14 +8,39 @@ $details_challange = get_field('details_challange');
 $details_benefits = get_field('details_benefits');
 $details_solution = get_field('details_solution');
 
+$details_quote = get_field('quote');
+$details_quote_by = get_field('quote_by');
+
  ?>
 
 
 <div class="container-fluid casestudies__single">
+
   <div class="row no-gutters">
-    <div class="back" style="background: <?php echo $post_colour ?>">
-      <a href="/news-events/"><img src="<?php echo get_template_directory_uri() ?>/images/back_btn.svg" alt="Back to News & Events">Back to News & Events</a>
+
+    <div class="col-md-6" style="background: #7D8D95">
+      <div class="back">
+        <a href="/case_studies/"><img src="<?php echo get_template_directory_uri() ?>/images/back_btn.svg" alt="Back to Case Studies">Back To Case Studies</a>
+      </div>
     </div>
+    <div class="col-md-6">
+
+      <?php $nextPost = get_next_post(); if($nextPost) { ?>
+        <div class="next">
+          <?php next_post_link('%link', 'View Next Case Study'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
+        </div>
+      <?php } else {  ?>
+        <div class="next">
+          <?php previous_post_link('%link', 'View Next Case Study'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
+        </div>
+      <?php } ?>
+
+    </div>
+
+  </div>
+
+    <div class="row no-gutters">
+
     <div class="casestudies__single__title__wrapper" style="background: url(<?php the_post_thumbnail_url(); ?>) center center; background-size: cover;">
       <div class="row">
         <div class="col-md-4 wow fadeInLeft">
@@ -68,6 +93,40 @@ $details_solution = get_field('details_solution');
       <h3><span>#03</span>SOLUTION</h3>
       <?php echo $details_solution ?>
     </div><!-- /.row -->
+  <?php endif; ?>
+
+  <div class="row no-gutters">
+
+    <div class="col-md-6" style="background: #7D8D95">
+      <div class="back">
+        <a href="/case_studies/"><img src="<?php echo get_template_directory_uri() ?>/images/back_btn.svg" alt="Back to Case Studies">Back To Case Studies</a>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <?php $nextPost = get_next_post(); if($nextPost) { ?>
+        <div class="next">
+          <?php next_post_link('%link', 'View Next Case Study'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
+        </div>
+      <?php } else {  ?>
+        <div class="next">
+          <?php previous_post_link('%link', 'View Next Case Study'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
+        </div>
+      <?php } ?>
+
+    </div>
+
+  </div>
+
+  <?php if($details_quote) : ?>
+
+    <div class="row no-gutters quote">
+      <div class="quote__wrapper">
+        <?php echo $details_quote ?>
+      </div>
+      <p class="quote__by"><?php echo $details_quote_by ?></p>
+    </div>
+
   <?php endif; ?>
 
 

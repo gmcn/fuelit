@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name: Fuel IT
 Theme URI: https://itfuel.com/
@@ -1896,7 +1897,7 @@ footer {
 .casestudies .filter {
   background: #C73F6E; }
   .casestudies .filter img {
-    width: 18px;
+    width: 15px;
     margin-left: 5px; }
   .casestudies .filter a {
     text-transform: uppercase;
@@ -2045,12 +2046,75 @@ footer {
 .casestudies__single .back {
   padding: 15px 35px; }
   .casestudies__single .back img {
-    width: 15px;
+    width: 12px;
     margin-right: 10px; }
   .casestudies__single .back a {
     color: #fff;
     font-weight: 700;
-    font-size: 14px; }
+    font-size: 14px;
+    transition: .5s; }
+  .casestudies__single .back a:hover {
+    text-decoration: none;
+    color: #000; }
+.casestudies__single .next {
+  padding: 15px 35px;
+  text-align: right; }
+  .casestudies__single .next img {
+    width: 12px;
+    margin-left: 10px; }
+  .casestudies__single .next a {
+    color: #1A2D33;
+    font-weight: 700;
+    font-size: 14px;
+    transition: .5s; }
+  .casestudies__single .next a:hover {
+    text-decoration: none;
+    color: #1ca4e3; }
+.casestudies__single .quote {
+  background: #1A2D33;
+  padding: 50px 50px 50px 50px;
+  color: #fff;
+  text-align: center;
+  font-size: 16px; }
+  @media screen and (min-width: 992px) {
+    .casestudies__single .quote {
+      padding: 90px 20% 90px 20%;
+      font-weight: 400;
+      font-size: 22px; } }
+  .casestudies__single .quote__wrapper:before {
+    content: "“";
+    float: left;
+    font-size: 60px;
+    line-height: .5em;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; }
+    @media screen and (min-width: 992px) {
+      .casestudies__single .quote__wrapper:before {
+        font-size: 120px; } }
+  .casestudies__single .quote__wrapper:after {
+    content: "“";
+    float: right;
+    font-size: 60px;
+    line-height: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    -webkit-transform: rotate(180deg);
+    /* Chrome and other webkit browsers */
+    -moz-transform: rotate(180deg);
+    /* FF */
+    -o-transform: rotate(180deg);
+    /* Opera */
+    -ms-transform: rotate(180deg);
+    /* IE9 */
+    transform: rotate(180deg);
+    /* W3C compliant browsers */ }
+    @media screen and (min-width: 992px) {
+      .casestudies__single .quote__wrapper:after {
+        font-size: 120px; } }
+  .casestudies__single .quote__by {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 25px; }
 .casestudies__single .row.no-gutters {
   margin-right: 0;
   margin-left: 0; }
