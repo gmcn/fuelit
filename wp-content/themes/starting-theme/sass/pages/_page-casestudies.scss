@@ -141,6 +141,9 @@
     .intro {
       font-size: 30px;
       font-weight: 300;
+      @include md {
+        padding-right: 20px !important;
+      }
     }
     .main {
       font-size: 16px;
@@ -160,7 +163,7 @@
   &__sub__content {
     border-top: 1px solid #1A2D33;
     font-size: 16px;
-    padding: 0 50px 50px 50px;
+    padding: 0 15px 25px 15px;
     @include md {
       padding: 0 75px 50px 75px;
     }
@@ -232,7 +235,7 @@
 
   .quote {
     background: #1A2D33;
-    padding: 50px 50px 50px 50px;
+    padding: 50px 25px 50px 25px;
     color: #fff;
     text-align: center;
     font-size: 16px;

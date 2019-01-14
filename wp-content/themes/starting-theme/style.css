@@ -1890,6 +1890,194 @@ footer {
     padding-right: 0;
     padding-left: 0; }
 
+.container-fluid.products, .container-fluid.products__single {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.products .filter {
+  background: #C73F6E; }
+  .products .filter img {
+    width: 15px;
+    margin-left: 5px; }
+  .products .filter a {
+    text-transform: uppercase;
+    font-weight: 300;
+    transition: .5s;
+    color: #fff; }
+  .products .filter .dropdown-menu a {
+    text-transform: none;
+    color: #000; }
+  .products .filter__wrapper {
+    background-color: #C73F6E;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5); }
+    @media screen and (min-width: 992px) {
+      .products .filter__wrapper {
+        float: left; } }
+  .products .filter__wrapper:first-of-type {
+    background-color: rgba(0, 0, 0, 0.75); }
+  .products .filter__wrapper:last-of-type {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 18px;
+    height: 53px;
+    background-color: transparent; }
+    .products .filter__wrapper:last-of-type a {
+      font-weight: 700;
+      transition: .5s; }
+    .products .filter__wrapper:last-of-type a:hover {
+      text-decoration: none;
+      color: #000; }
+.products .row {
+  margin-left: 0;
+  margin-right: 0; }
+.products .col-md-4 {
+  padding-left: 0;
+  padding-right: 0; }
+.products__post {
+  text-align: left;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  position: relative; }
+  .products__post__wrapper {
+    padding-bottom: 75px; }
+    .products__post__wrapper .terms {
+      background: #000;
+      color: #fff;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 10px 15px 10px 25px; }
+    .products__post__wrapper .term-circle {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      float: right; }
+    .products__post__wrapper h2 {
+      color: #565656;
+      font-weight: 700;
+      font-size: 40px;
+      margin-top: 25px;
+      padding-left: 25px;
+      padding-right: 25px; }
+      .products__post__wrapper h2 img {
+        height: 80px;
+        display: block;
+        margin-bottom: 25px; }
+    .products__post__wrapper p {
+      padding-left: 25px;
+      padding-right: 25px; }
+    .products__post__wrapper a {
+      color: #565656;
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      transition: .5s; }
+    .products__post__wrapper a:hover {
+      text-decoration: none;
+      color: #1ca4e3; }
+.products .pagi {
+  background: #CDD1D3;
+  padding: 10px; }
+  .products .pagi a {
+    color: #fff; }
+
+.single-products {
+  background: #EEF0F1; }
+
+.products__single {
+  /* no-gutters Class Rules */ }
+  .products__single__title__wrapper {
+    padding: 25px 15px 0 15px;
+    color: #000; }
+    @media screen and (min-width: 992px) {
+      .products__single__title__wrapper {
+        padding: 50px 75px 0 75px; } }
+    .products__single__title__wrapper h2 {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase; }
+      @media screen and (min-width: 992px) {
+        .products__single__title__wrapper h2 {
+          font-size: 32px; } }
+      @media screen and (min-width: 1200px) {
+        .products__single__title__wrapper h2 {
+          font-size: 43px; } }
+      .products__single__title__wrapper h2 img {
+        height: 120px;
+        display: block;
+        margin-bottom: 25px; }
+        @media screen and (min-width: 992px) {
+          .products__single__title__wrapper h2 img {
+            margin-bottom: 50px; } }
+    .products__single__title__wrapper h3 {
+      background-color: #fff;
+      color: #536874;
+      padding: 10px;
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 0; }
+      .products__single__title__wrapper h3 span {
+        display: block;
+        opacity: .5; }
+    .products__single__title__wrapper p {
+      font-size: 25px; }
+  .products__single__content__wrapper {
+    padding: 25px 15px;
+    color: #1A2D33; }
+    @media screen and (min-width: 992px) {
+      .products__single__content__wrapper {
+        padding: 50px 75px; } }
+    .products__single__content__wrapper h2 {
+      margin: 0 0 25px 0; }
+    .products__single__content__wrapper p {
+      font-size: 16px;
+      margin-bottom: 25px; }
+  .products__single .thumbimg {
+    background: #EDEDED; }
+    .products__single .thumbimg img {
+      width: 100%; }
+    .products__single .thumbimg span {
+      float: right;
+      margin-top: -35px;
+      margin-right: 15px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      z-index: 1; }
+    .products__single .thumbimg img.more {
+      width: 20px;
+      margin-left: 7.5px; }
+  .products__single .back {
+    padding: 15px 35px; }
+    .products__single .back img {
+      width: 15px;
+      margin-right: 10px; }
+    .products__single .back a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px; }
+  .products__single .next {
+    padding: 15px 35px;
+    text-align: right; }
+    .products__single .next img {
+      width: 12px;
+      margin-left: 10px; }
+    .products__single .next a {
+      color: #1A2D33;
+      font-weight: 700;
+      font-size: 14px;
+      transition: .5s; }
+    .products__single .next a:hover {
+      text-decoration: none;
+      color: #1ca4e3; }
+  .products__single .row.no-gutters {
+    margin-right: 0;
+    margin-left: 0; }
+  .products__single .row.no-gutters > [class^="col-"],
+  .products__single .row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0; }
+
 .container-fluid.casestudies, .container-fluid.casestudies__single {
   padding-left: 0 !important;
   padding-right: 0 !important; }
@@ -2004,6 +2192,9 @@ footer {
   .casestudies__single__content .intro {
     font-size: 30px;
     font-weight: 300; }
+    @media screen and (min-width: 992px) {
+      .casestudies__single__content .intro {
+        padding-right: 20px !important; } }
   .casestudies__single__content .main {
     font-size: 16px; }
     .casestudies__single__content .main a {
@@ -2018,7 +2209,7 @@ footer {
 .casestudies__single__sub__content {
   border-top: 1px solid #1A2D33;
   font-size: 16px;
-  padding: 0 50px 50px 50px; }
+  padding: 0 15px 25px 15px; }
   @media screen and (min-width: 992px) {
     .casestudies__single__sub__content {
       padding: 0 75px 50px 75px; } }
@@ -2072,7 +2263,7 @@ footer {
     color: #1ca4e3; }
 .casestudies__single .quote {
   background: #1A2D33;
-  padding: 50px 50px 50px 50px;
+  padding: 50px 25px 50px 25px;
   color: #fff;
   text-align: center;
   font-size: 16px; }

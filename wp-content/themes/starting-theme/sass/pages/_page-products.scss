@@ -1,0 +1,241 @@
+.container-fluid.products, .container-fluid.products__single {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.products {
+  .filter {
+    background: #C73F6E;
+    img {
+      width: 15px;
+      margin-left: 5px;
+    }
+    a {
+      text-transform: uppercase;
+      font-weight: 300;
+      transition: .5s;
+      color: #fff;
+    }
+    .dropdown-menu {
+      a {
+        text-transform: none;
+        color: #000;
+      }
+    }
+    &__wrapper {
+      // display: inline-block;
+      @include md {
+        float: left;
+      }
+      background-color: #C73F6E;
+      padding: 10px;
+      background-color: rgba(0,0,0,.50);
+    }
+    &__wrapper:first-of-type {
+      background-color: rgba(0,0,0,.75);
+    }
+    &__wrapper:last-of-type {
+      padding-left: 25px;
+      padding-right: 25px;
+      padding-top: 18px;
+      height: 53px;
+      background-color: transparent;
+      a {
+        font-weight: 700;
+        transition: .5s;
+      }
+      a:hover {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .col-md-4 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &__post {
+    text-align: left;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    position: relative;
+    &__wrapper {
+      padding-bottom: 75px;
+      .terms {
+        background: #000;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 10px 15px 10px 25px;
+      }
+      .term-circle {
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        float: right;
+      }
+      h2 {
+        color: #565656;
+        font-weight: 700;
+        font-size: 40px;
+        margin-top: 25px;
+        // margin-bottom: 25px;
+        padding-left: 25px;
+        padding-right: 25px;
+        img {
+          height: 80px;
+          display: block;
+          margin-bottom: 25px;
+        }
+      }
+      p {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+      a {
+        color: #565656;
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+        transition: .5s;
+      }
+      a:hover {
+        text-decoration: none;
+        color: #1ca4e3;
+      }
+    }
+  }
+  .pagi {
+    background: #CDD1D3;
+    padding: 10px;
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.single-products {
+  background: #EEF0F1;
+}
+
+.products__single {
+  /* no-gutters Class Rules */
+  &__title__wrapper {
+    padding: 25px 15px 0 15px;
+    color: #000;
+    @include md {
+      padding: 50px 75px 0 75px;
+      }
+    h2 {
+      @include md {
+        font-size: 32px;
+      }
+      @include lg {
+        font-size: 43px;
+      }
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      img {
+        height: 120px;
+        display: block;
+        margin-bottom: 25px;
+        @include md {
+          margin-bottom: 50px;
+        }
+      }
+    }
+    h3 {
+      background-color: #fff;
+      color: #536874;
+      padding:  10px;
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 0;
+      span {
+        display: block;
+        opacity: .5;
+      }
+    }
+    p {
+      font-size: 25px;
+    }
+  }
+  &__content__wrapper {
+    padding: 25px 15px;
+    color: #1A2D33;
+    @include md {
+      padding: 50px 75px;
+    }
+    h2 {
+      margin: 0 0 25px 0;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+  }
+  .thumbimg {
+    background: #EDEDED;
+    img {
+      width: 100%;
+    }
+    span {
+      float: right;
+      margin-top: -35px;
+      margin-right: 15px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    img.more {
+      width: 20px;
+      margin-left: 7.5px;
+    }
+  }
+  .back {
+    img {
+      width: 15px;
+      margin-right: 10px;
+    }
+    a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    padding: 15px 35px;
+  }
+  .next {
+    padding: 15px 35px;
+    text-align: right;
+    img {
+      width: 12px;
+      margin-left: 10px;
+    }
+    a {
+      color: #1A2D33;
+      font-weight: 700;
+      font-size: 14px;
+      transition: .5s;
+    }
+    a:hover {
+      text-decoration: none;
+      color: #1ca4e3;
+    }
+  }
+
+  .row.no-gutters {
+     margin-right: 0;
+     margin-left: 0;
+  }
+  .row.no-gutters > [class^="col-"],
+  .row.no-gutters > [class*=" col-"] {
+     padding-right: 0;
+     padding-left: 0;
+  }
+}
