@@ -31,7 +31,7 @@
 								?>
 						</div>
 						<div class="col-md-2">
-							<h4>WHAT WE’VE DONE</h4>
+							<h4><a href="/case_studies/">WHAT WE’VE DONE</a></h4>
 							<?php wp_nav_menu( array(
 								'theme_location' => 'footer-2' ) );
 								?>
@@ -49,10 +49,10 @@
 								?>
 						</div>
 						<div class="col-md-2">
-							<h4><a href="/products">PRODUCT PORTFOLIO</a></h4>
+							<h4><a href="/products/">PRODUCT PORTFOLIO</a></h4>
 						</div>
 						<div class="col-md-2">
-							<h4><a href="#">NEWS & EVENTS</a></h4>
+							<h4><a href="/news-events/">NEWS & EVENTS</a></h4>
 						</div>
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 
 			<div class="row signature">
 				<div class="col-md-2 copyright">
-					 © Copyright <span>Fuel IT 2018</span>
+					 © Copyright <span>Fuel IT <?php echo date('Y'); ?></span>
 				</div>
 				<div class="col-md-10">
 					<div class="row">
