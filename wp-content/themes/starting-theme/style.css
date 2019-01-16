@@ -683,11 +683,14 @@ span.open {
     margin: 0;
     padding: 0; }
     .overlay-content ul a {
-      font-size: 28px;
+      font-size: 18px;
       font-weight: 400;
       color: #fff;
       text-transform: uppercase;
       transition: .5s; }
+      @media screen and (min-width: 992px) {
+        .overlay-content ul a {
+          font-size: 28px; } }
     .overlay-content ul a:hover {
       color: #00A3E6; }
   .overlay-content ul ul {
