@@ -262,7 +262,7 @@ function case_studies_post_type() {
 		'label'                 => __( 'Case Study', 'text_domain' ),
 		'description'           => __( 'Case Study information page.', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'featured' ),
+		'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'featured', 'page-attributes' ),
 		// 'taxonomies'            => array( 'category' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -345,7 +345,7 @@ function case_studies_taxonomies()
     'menu_name' => __( 'Case Study Tags' ),
   );
 
-  register_taxonomy('tag','case_studies',array(
+  register_taxonomy('case_studies_tag','case_studies',array(
     'hierarchical' => false,
     'labels' => $casestudy_tags_args,
     'show_ui' => true,
@@ -391,14 +391,14 @@ function products_post_type() {
 		'label'                 => __( 'Product', 'text_domain' ),
 		'description'           => __( 'Product information page.', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'featured' ),
+		'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'featured', 'page-attributes' ),
 		// 'taxonomies'            => array( 'category' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
 		'show_in_menu'          => true,
 		'menu_position'         => 5,
-		'menu_icon'             => 'dashicons-clipboard',
+		'menu_icon'             => 'dashicons-format-aside',
 		'show_in_admin_bar'     => true,
 		'show_in_nav_menus'     => true,
 		'can_export'            => true,
@@ -457,15 +457,88 @@ function products_taxonomies()
     'menu_name' => __( 'Product Tags' ),
   );
 
-  register_taxonomy('tag','products',array(
+  register_taxonomy('products_tag','products',array(
     'hierarchical' => false,
     'labels' => $products_tags_args,
     'show_ui' => true,
     'update_count_callback' => '_update_post_term_count',
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'tag' ),
+    'rewrite' => array( 'slug' => 'products_tag' )
   ));
 }
+
+/**
+* add order column to Products admin listing screen
+*/
+function add_new_products_column($post_columns) {
+  $post_columns['menu_order'] = "Order";
+  return $post_columns;
+}
+add_action('manage_edit-products_columns', 'add_new_products_column');
+
+/**
+* add order column to Case Studies admin listing screen
+*/
+function add_new_case_studies_column($post_columns) {
+  $post_columns['menu_order'] = "Order";
+  return $post_columns;
+}
+add_action('manage_edit-case_studies_columns', 'add_new_case_studies_column');
+
+/**
+* show custom order column values
+*/
+function show_order_column($name){
+  global $post;
+
+  switch ($name) {
+    case 'menu_order':
+      $order = $post->menu_order;
+      echo $order;
+      break;
+   default:
+      break;
+   }
+}
+add_action('manage_products_posts_custom_column','show_order_column');
+
+/**
+* show custom order column values
+*/
+function show_case_order_column($name){
+  global $post;
+
+  switch ($name) {
+    case 'menu_order':
+      $order = $post->menu_order;
+      echo $order;
+      break;
+   default:
+      break;
+   }
+}
+add_action('manage_case_studies_posts_custom_column','show_case_order_column');
+
+/**
+* make column sortable
+*/
+function order_column_register_sortable($columns){
+  $columns['menu_order'] = 'menu_order';
+  return $columns;
+}
+add_filter('manage_edit-products_sortable_columns','order_column_register_sortable');
+
+/*
+ * Sort post archive by menu_order
+ */
+
+add_action( 'pre_get_posts', 'mpe_products_sort_order');
+function mpe_products_sort_order($query){
+	if(is_archive() || is_tax() && $query->get('post_type') == 'products' || $query->get('post_type') == 'case_studies'):
+	   $query->set( 'order', 'ASC' );
+	   $query->set( 'orderby', 'menu_order' );
+	endif;
+};
 
 function cc_mime_types($mimes) {
  $mimes['svg'] = 'image/svg+xml';
