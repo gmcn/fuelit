@@ -4,9 +4,21 @@ $term = array_pop($terms);
 $post_colour = get_field('post_colour', $term );
 $product_logo = get_field('product_logo');
 $product_intro = get_field('product_intro');
+$product_video = get_field('product_video');
 
 $content_col1 = get_field('column_1');
 $content_col2 = get_field('column_2');
+
+$taxterms = get_the_terms( $post->ID, array(
+'taxonomy' => 'products_tag',
+) );
+
+foreach ($taxterms as $taxterm) {
+  // echo $taxterm->slug;
+}
+
+$term_list = wp_get_post_terms($post->ID, 'products_tag', array("fields" => "names"));
+
  ?>
 
 
@@ -48,24 +60,23 @@ $content_col2 = get_field('column_2');
         <?php echo $product_intro ?>
 
         <h3>
-          <span>#01</span>
+
+          <?php $menu_order = get_post_field( 'menu_order', $post->ID); ?>
+
+          <span>#<?php if ($menu_order < 10) {echo '0';} echo $menu_order ?></span>
           <?php echo the_title(); ?></h3>
       </div>
     </div>
     <div class="col-md-6 thumbimg matchheight wow fadeInRight" style="background: url(<?php echo the_post_thumbnail_url(); ?>) center center no-repeat; background-size: cover;">
 
-      <?php if( have_rows('gallery') ): ?>
+      <?php if ($product_video) : ?>
 
-        <a class="fancybox" rel="group" href="<?php the_post_thumbnail_url(); ?>" title="<?php the_title(); ?>">
-
-            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" />
-
+        <a class="various fancybox vert-align" data-fancybox-type="iframe" href="https://www.youtube.com/embed/<?php echo $product_video ?>?autoplay=1&rel=0">
+          <img class="play" src="<?php echo get_template_directory_uri() ?>/images/play_btn.svg">
         </a>
 
+        <span>Click The Arrow To View Demo Video.</span>
 
-        <span>Click On the Image To View More Images. <img class="more" src="<?php echo get_template_directory_uri() ?>/images/view.svg" alt="View <?php the_title() ?>"></span>
-      <?php else : ?>
-        <!-- <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" /> -->
       <?php endif; ?>
 
     </div>
@@ -82,59 +93,100 @@ $content_col2 = get_field('column_2');
     </div>
   </div>
 
-  <div class="row no-gutters">
+  <?php include(locate_template("inc/page-elements/call-back.php")); ?>
 
-    <div class="col-md-6" style="background: <?php echo $post_colour ?>">
-      <div class="back">
-        <a href="/products/"><img src="<?php echo get_template_directory_uri() ?>/images/back_btn.svg" alt="Back to Products">Back To Products</a>
-      </div>
+  <div class="row no-gutters dynamic clear">
+
+    <div class="col-xs-6 news_posts">
+      <?php
+
+      $args = array(
+        'post_type' => 'case_studies',
+        'tax_query' => array(
+             array(
+                 'taxonomy' => 'case_studies_tag',
+                 'field' => 'name',
+                 'terms' => $term_list,
+             ),
+         ),
+        'posts_per_page' => '2',
+        'orderby' => 'date',
+        'order' => 'ASC',
+      );
+      $query = new WP_Query( $args ); ?>
+
+      <?php if ( $query->have_posts() ) : ?>
+        <div class="col-md-12">
+          <p>Related Case Studies</p>
+        </div>
+       <!-- the loop -->
+       <?php while ( $query->have_posts() ) : $query->the_post();
+
+       $title = get_the_title();
+
+       ?>
+         <div class="col-md-6 post" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>) center center; background-size: cover;">
+           <div class="post__wrapper">
+             <h4><?php echo wp_trim_words($title, 8); ?></h4>
+             <a href="<?php echo the_permalink(); ?>">View Case Study</a>
+           </div>
+         </div>
+       <?php endwhile; ?>
+       <!-- end of the loop -->
+
+       <!-- pagination here -->
+
+       <?php wp_reset_postdata(); ?>
+
+      <?php else : ?>
+
+      <?php endif; ?>
     </div>
-    <div class="col-md-6">
 
-      <?php $nextPost = get_next_post(); if($nextPost) { ?>
-        <div class="next">
-          <?php next_post_link('%link', 'View Next Product'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
-        </div>
-      <?php } else {  ?>
-        <div class="next">
-          <?php previous_post_link('%link', 'View Next Product'); ?><img src="<?php echo get_template_directory_uri() ?>/images/next_btn.svg" alt="%title">
-        </div>
-      <?php } ?>
+    <div class="col-xs-6 casestudy_posts">
+      <?php
 
+      $args = array(
+       'post_type' => 'post',
+       'tag' => $taxterm->slug,
+       'posts_per_page' => '2',
+       'orderby' => 'date',
+       'order' => 'DESC',
+      );
+      $query = new WP_Query( $args ); ?>
+
+      <?php if ( $query->have_posts() ) : ?>
+        <div class="col-md-12">
+          <p>Related News Articles</p>
+        </div>
+       <!-- the loop -->
+       <?php while ( $query->have_posts() ) : $query->the_post();
+
+       $title = get_the_title();
+
+       ?>
+         <div class="col-md-6 post" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>) center center; background-size: cover;">
+           <div class="post__wrapper">
+             <div class="date">
+               <?php echo the_date() ?>
+             </div>
+             <h4><?php echo wp_trim_words($title, 8); ?></h4>
+             <a href="<?php echo the_permalink(); ?>">View Article</a>
+           </div>
+
+         </div>
+       <?php endwhile; ?>
+       <!-- end of the loop -->
+
+       <!-- pagination here -->
+
+       <?php wp_reset_postdata(); ?>
+
+      <?php else : ?>
+
+      <?php endif; ?>
     </div>
 
   </div>
-
 
 </div>
-
-
-<?php if( have_rows('gallery') ): ?>
-  <!-- Hidden Gallery -->
-  <div class="hidden">
-    <?php while( have_rows('gallery') ): the_row();
-
-      // vars
-      $image = get_sub_field('image');
-      $image_title = get_sub_field('image_title');
-
-      ?>
-
-        <a class="fancybox" rel="group" href="<?php echo $image ?>" title="<?php if($image_title) : ?>
-          <?php echo $image_title ?>
-        <?php else : ?>
-          <?php the_title(); ?>
-        <?php endif; ?>">
-
-            <img src="<?php echo $image ?>" alt="<?php if($image_title) : ?>
-              <?php echo $image_title ?>
-            <?php else : ?>
-              <?php the_title(); ?>
-            <?php endif; ?>" />
-
-        </a>
-
-
-    <?php endwhile; wp_reset_postdata(); ?>
-  </div>
-<?php endif; ?>

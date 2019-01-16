@@ -534,7 +534,7 @@ add_filter('manage_edit-products_sortable_columns','order_column_register_sortab
 
 add_action( 'pre_get_posts', 'mpe_products_sort_order');
 function mpe_products_sort_order($query){
-	if(is_archive() || is_tax() && $query->get('post_type') == 'products' || $query->get('post_type') == 'case_studies'):
+	if(is_archive() || is_tax('case_studies', 'products') && $query->get('post_type') == 'products' || $query->get('post_type') == 'case_studies'):
 	   $query->set( 'order', 'ASC' );
 	   $query->set( 'orderby', 'menu_order' );
 	endif;

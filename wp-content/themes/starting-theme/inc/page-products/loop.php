@@ -8,7 +8,7 @@
       $product_logo = get_field('product_logo');
        ?>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 products__post wow fadeInUp matchheight" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>) center center; background-size: cover;">
+        <div class="col-lg-3 col-md-4 col-sm-6 products__post wow fadeInUp matchheight">
           <div class="products__post__wrapper">
             <div class="terms">
               <?php
