@@ -29,6 +29,7 @@
     $('.partnerheight').matchHeight();
     $('.careermatch').matchHeight();
     $('.matchheading').matchHeight();
+    $('.matchlist').matchHeight();
     // $('.matchimg').matchHeight();
   }
   window.onload = startMatchHeight;
