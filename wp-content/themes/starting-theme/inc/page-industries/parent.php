@@ -21,7 +21,7 @@ $child_query = new WP_Query( $args ); ?>
 
          ?>
 
-          <div class="col-sm-6 col-md-4 industries-sub wow fadeInLeft matchheight" style="color: <?php echo $pageColour ?>">
+          <div class="col-sm-6 col-md-4 industries-sub wow fadeInUp matchheight" style="color: <?php echo $pageColour ?>">
             <span class="counter">#<?php echo $menu_order ?></span>
             <h2 class="matchheading">
               <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="color: <?php echo $pageColour ?>"><?php the_title(); ?></a>

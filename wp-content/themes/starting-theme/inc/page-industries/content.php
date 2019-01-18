@@ -37,12 +37,12 @@
 
 <div class="container-fluid industrial__content">
   <div class="row">
-    <div class="col-md-6 industrial__content__intro">
+    <div class="col-md-6 industrial__content__intro  wow fadeInLeft">
       <?php echo $industrial_intro ?>
     </div><!-- /.col-md-6 -->
   </div>
 
-  <div class="row industrial__content__title">
+  <div class="row industrial__content__title wow fadeInDown">
 
     <div class="col-md-6">
       <h2><?php the_title(); ?></h2>
@@ -54,10 +54,10 @@
   </div>
 
   <div class="row industrial__content__main">
-    <div class="col-md-6">
+    <div class="col-md-6 wow fadeInLeft">
       <?php echo $industrial_main_copy ?>
     </div><!-- /.col-md-6 -->
-    <div class="col-md-6 industrial__content__main__requirements">
+    <div class="col-md-6 industrial__content__main__requirements wow fadeInRight">
 
       <?php if( $requirements ) : ?>
         <ul>
