@@ -19,6 +19,7 @@ get_header(); ?>
 include(locate_template("inc/page-elements/title.php"));
 include(locate_template("inc/page-industries/content.php"));
 include(locate_template("inc/page-elements/call-back.php"));
+include(locate_template("inc/page-elements/dynamic-industries.php"));
 
  ?>
 

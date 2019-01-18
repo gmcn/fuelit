@@ -80,15 +80,146 @@
   }
 }
 
-.industrial__content {
-  padding: 80px 0;
-  color: #fff;
-  p {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 300;
-    strong {
+.container-fluid.industrial__content {
+  @include md {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+  }
+}
+
+.container-fluid.industrial__single {
+  @include md {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}
+
+.industrial__single {
+  .col-md-6:first-of-type {
+    background: #09203E;
+    color: #fff;
+  }
+  .back {
+    img {
+      width: 15px;
+      margin-right: 10px;
+    }
+    a {
+      color: #fff;
       font-weight: 700;
     }
+    padding: 15px 35px;
   }
+  .next {
+    text-align: right;
+    img {
+      width: 15px;
+      margin-left: 10px;
+    }
+    a {
+      color: #09203E;
+      font-weight: 700;
+    }
+    padding: 15px 35px;
+  }
+}
+
+.industrial__content {
+  background: #EEF0F1;
+  padding: 70px 0 50px 0;
+  color: #1A2D33;
+  &__intro {
+    p:first-of-type {
+      font-size: 25px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  &__title {
+    background: #fff;
+    padding: 25px 0 0 0;
+    margin-bottom: 50px;
+    margin-top: 25px;
+    h2 {
+      color: #09203E;
+      font-size: 25px;
+      font-weight: 700;
+    }
+    &__requirementhead {
+      text-align: right;
+      color: #A6AEB9;
+      font-weight: 700;
+      font-size: 16px;
+      padding-top: 25px;
+    }
+  }
+  &__main {
+
+    &__requirements {
+      ul {
+        list-style: none;
+        text-align: right;
+        margin: 0;
+        padding: 0;
+        li {
+          width: 80%;
+          padding: 3px 10px;
+          float: right;
+          clear: both;
+          margin-bottom: 5px;
+          border-radius: 8px 0 0 8px;
+          a {
+            color: #fff;
+            font-weight: 14px;
+            font-weight: 700;
+            transition: .5s;
+          }
+          a:hover {
+            color: #000;
+            text-decoration: none;
+          }
+        }
+      }
+      .color-accounts-financials {
+        background: #26aa86;
+      }
+      .color-bespoke-software-development {
+        background: #b45d21;
+      }
+      .color-business-process {
+        background: #eeee22;
+      }
+      .color-cloud-based {
+        background: #b001ba;
+      }
+      .color-erp {
+        background: #b50000;
+      }
+      .color-smart-reporting {
+        background: #d19a30;
+      }
+    }
+  }
+}
+
+.industry.casestudy_posts {
+  p {
+    a {
+      color: #7FA3D1;
+      transition: .5s;
+    }
+    a:hover {
+      color: #09203E;
+      text-decoration: none;
+    }
+  }
+
+  .post__wrapper {
+    background: rgba(9, 32, 62, 0.65);
+  }
+}
+
+.industry.casestudy_posts .post:last-of-type {
+  display: none;
 }
