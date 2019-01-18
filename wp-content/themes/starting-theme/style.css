@@ -1257,6 +1257,12 @@ footer {
     padding-left: 35px !important;
     padding-right: 35px !important; } }
 
+@media screen and (min-width: 992px) {
+  .g-recaptcha {
+    float: right; } }
+.g-recaptcha div {
+  display: inline-block; }
+
 .row.no-gutters {
   margin-right: 0;
   margin-left: 0; }

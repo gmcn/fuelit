@@ -7,6 +7,15 @@
   }
 }
 
+.g-recaptcha {
+  @include md {
+    float: right;
+  }
+  div {
+    display: inline-block;
+  }
+}
+
 .row.no-gutters {
    margin-right: 0;
    margin-left: 0;
