@@ -20,8 +20,10 @@
             <h2 style="color: <?php echo $pageColour ?>">
               <?php echo $award_name; ?>
             </h2>
-            <img src="<?php echo $award_logo; ?>" alt="">
-            <a href="<?php echo $awards_site ?>" target="_blank">Click to view their website.</a>
+            <img src="<?php echo $award_logo; ?>" alt="<?php echo $award_name; ?>">
+            <?php if ($awards_site) : ?>
+              <a href="<?php echo $awards_site ?>" target="_blank">Click to view their website.</a>
+            <?php endif; ?>
           </div>
 
         <?php $i++; endwhile; ?>

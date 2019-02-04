@@ -1317,7 +1317,11 @@ footer {
     margin-top: 15px;
     display: inline-block;
     color: #fff;
-    font-weight: 700; }
+    font-weight: 700;
+    transition: .5s; }
+  .call-back a:hover {
+    color: #e53c79;
+    text-decoration: none; }
   .call-back .consent {
     margin-top: 15px;
     text-align: right;
@@ -2428,6 +2432,7 @@ footer {
   position: relative; }
   .casestudies__post__wrapper {
     background: rgba(0, 0, 0, 0.5);
+    transition: .5s;
     position: relative;
     height: 100%;
     width: 100%;
@@ -2438,7 +2443,7 @@ footer {
       font-weight: 700;
       margin-top: 15%;
       padding-left: 25px; }
-    .casestudies__post__wrapper a {
+    .casestudies__post__wrapper span.view {
       color: #fff;
       position: absolute;
       bottom: 25px;
@@ -2447,6 +2452,8 @@ footer {
     .casestudies__post__wrapper a:hover {
       text-decoration: none;
       color: #1ca4e3; }
+  .casestudies__post__wrapper:hover {
+    background: rgba(0, 0, 0, 0.1); }
 .casestudies .pagi {
   background: #CDD1D3;
   padding: 10px; }

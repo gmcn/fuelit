@@ -93,6 +93,11 @@
     display: inline-block;
     color: #fff;
     font-weight: 700;
+    transition: .5s;
+  }
+  a:hover {
+    color: #e53c79;
+    text-decoration: none;
   }
   .consent {
     margin-top: 15px;
