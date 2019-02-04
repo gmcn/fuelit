@@ -1263,15 +1263,6 @@ footer {
 .g-recaptcha div {
   display: inline-block; }
 
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0; }
-
-.row.no-gutters > [class^="col-"],
-.row.no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0; }
-
 .title {
   background-color: #000;
   padding-top: 40px;
@@ -1750,6 +1741,69 @@ footer {
       margin-bottom: 50px; }
     .container-fluid.history .looking_forward p {
       font-weight: 700; }
+
+@media screen and (min-width: 992px) {
+  .container-fluid.offer {
+    padding-left: 80px !important;
+    padding-right: 80px !important; } }
+
+.offer {
+  background: #A7BCB6;
+  padding: 70px 0 50px 0;
+  color: #fff; }
+  .offer__intro {
+    margin-bottom: 50px; }
+    .offer__intro p:first-of-type {
+      font-weight: 700;
+      font-size: 18px; }
+    .offer__intro p {
+      font-size: 16px; }
+  .offer__links {
+    margin-bottom: 50px; }
+    .offer__links a {
+      display: inline-block;
+      color: #fff;
+      margin-left: 10px;
+      transition: .5s;
+      font-size: 30px; }
+    .offer__links a:hover {
+      color: #000;
+      text-decoration: none; }
+  .offer .offers {
+    border-top: 1px solid #fff; }
+    .offer .offers__title {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 25px; }
+      .offer .offers__title h2 {
+        color: #09203E;
+        font-size: 25px;
+        font-weight: 700;
+        margin-top: 10px; }
+        .offer .offers__title h2 a {
+          color: #536874;
+          transition: .5s; }
+        .offer .offers__title h2 a:hover {
+          color: #000;
+          text-decoration: none; }
+      .offer .offers__title span {
+        color: #A7BCB6;
+        font-weight: 700;
+        font-size: 25px; }
+    .offer .offers__content {
+      margin-bottom: 50px; }
+
+.industry.casestudy_posts p a {
+  color: #7FA3D1;
+  transition: .5s; }
+.industry.casestudy_posts p a:hover {
+  color: #09203E;
+  text-decoration: none; }
+.industry.casestudy_posts .post__wrapper {
+  background: rgba(9, 32, 62, 0.65); }
+
+.industry.casestudy_posts .post:last-of-type {
+  display: none; }
 
 .industries-parent {
   background: url("images/about-parent_bg@2x.jpg") center center;
