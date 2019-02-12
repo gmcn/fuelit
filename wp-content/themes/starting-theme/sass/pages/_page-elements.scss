@@ -136,6 +136,10 @@
       left: 0;
       position: absolute;
       background: rgba(0,0,0,.5);
+      transition: .5s;
+    }
+    &__wrapper:hover {
+      background: rgba(0,0,0,.2);
     }
     .date {
       color: #fff;
@@ -166,18 +170,15 @@
       margin-bottom: 0;
       text-align: center;
     }
-    a {
+    p.view {
       color: #fff;
       transition: .5s;
       position: absolute;
-      bottom: 20px;
+      bottom: 15px;
+      line-height: 0;
       width: 100%;
       text-align: center;
       font-weight: 700;
-    }
-    a:hover {
-      color: #00b6f5;
-      text-decoration: none;
     }
     height: 300px;
   }

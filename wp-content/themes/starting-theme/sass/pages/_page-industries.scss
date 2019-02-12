@@ -217,6 +217,10 @@
 
   .post__wrapper {
     background: rgba(9, 32, 62, 0.65);
+    transition: .5s;
+  }
+  .post__wrapper:hover {
+    background: rgba(9, 32, 62, 0.25);
   }
 }
 

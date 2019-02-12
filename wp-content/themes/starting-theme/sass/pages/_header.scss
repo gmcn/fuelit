@@ -131,7 +131,6 @@ span.open {
       margin-left: 15px;
       @include md {
         display: none;
-        transition: 0.5s;
       }
       a {
         @include md {
@@ -152,6 +151,10 @@ span.open {
           font-size: 20px;
           font-weight: 400;
         }
+        -moz-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+    -webkit-transition: all .3s linear;
         color: #00A3E6;
         text-decoration: none;
         font-size: 16px;

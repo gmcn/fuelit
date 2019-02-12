@@ -577,12 +577,6 @@ a {
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-.widget {
-  margin: 0 0 1.5em;
-  /* Make sure select elements fit in widgets. */ }
-  .widget select {
-    max-width: 100%; }
-
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -697,8 +691,7 @@ span.open {
     margin-left: 15px; }
     @media screen and (min-width: 992px) {
       .overlay-content ul ul {
-        display: none;
-        transition: 0.5s; } }
+        display: none; } }
     .overlay-content ul ul a {
       color: #00A3E6;
       text-decoration: none;
@@ -712,6 +705,10 @@ span.open {
   .overlay-content ul ul ul {
     font-weight: 400; }
     .overlay-content ul ul ul a {
+      -moz-transition: all .3s linear;
+      -o-transition: all .3s linear;
+      transition: all .3s linear;
+      -webkit-transition: all .3s linear;
       color: #00A3E6;
       text-decoration: none;
       font-size: 16px; }
@@ -1353,7 +1350,10 @@ footer {
     top: 0;
     left: 0;
     position: absolute;
-    background: rgba(0, 0, 0, 0.5); }
+    background: rgba(0, 0, 0, 0.5);
+    transition: .5s; }
+  .dynamic .post__wrapper:hover {
+    background: rgba(0, 0, 0, 0.2); }
   .dynamic .post .date {
     color: #fff;
     opacity: .7;
@@ -1380,17 +1380,15 @@ footer {
     @media screen and (min-width: 1200px) {
       .dynamic .post h4 {
         font-size: 30px; } }
-  .dynamic .post a {
+  .dynamic .post p.view {
     color: #fff;
     transition: .5s;
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
+    line-height: 0;
     width: 100%;
     text-align: center;
     font-weight: 700; }
-  .dynamic .post a:hover {
-    color: #00b6f5;
-    text-decoration: none; }
 
 .about-parent {
   background: url("images/about-parent_bg@2x.jpg") center center;
@@ -1566,7 +1564,7 @@ footer {
     width: 100%;
     padding: 15px;
     color: #00A3E6; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1680px) {
       .person__contact {
         position: absolute;
         bottom: 0;
@@ -1604,7 +1602,7 @@ footer {
     font-weight: 400;
     color: rgba(0, 15, 35, 0.4);
     margin: 0 0 25px; }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1680px) {
     .person .vert-align {
       position: absolute;
       top: 50%;
@@ -1970,7 +1968,10 @@ footer {
   color: #09203E;
   text-decoration: none; }
 .industry.casestudy_posts .post__wrapper {
-  background: rgba(9, 32, 62, 0.65); }
+  background: rgba(9, 32, 62, 0.65);
+  transition: .5s; }
+.industry.casestudy_posts .post__wrapper:hover {
+  background: rgba(9, 32, 62, 0.25); }
 
 .industry.casestudy_posts .post:last-of-type {
   display: none; }
@@ -2923,36 +2924,6 @@ footer {
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-## Posts and pages
---------------------------------------------------------------*/
-.sticky {
-  display: block; }
-
-.hentry {
-  margin: 0 0 1.5em; }
-
-.updated:not(.published) {
-  display: none; }
-
-.page-content,
-.entry-content,
-.entry-summary {
-  margin: 1.5em 0 0; }
-
-.page-links {
-  clear: both;
-  margin: 0 0 1.5em; }
-
-/*--------------------------------------------------------------
-## Comments
---------------------------------------------------------------*/
-.comment-content a {
-  word-wrap: break-word; }
-
-.bypostauthor {
-  display: block; }
-
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
