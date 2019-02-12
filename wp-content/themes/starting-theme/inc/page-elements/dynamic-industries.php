@@ -39,11 +39,13 @@ $page_tags = get_the_tags();
        $title = get_the_title();
 
        ?>
-         <div class="col-md-3 post" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>) center center; background-size: cover;">
-           <div class="post__wrapper">
-             <h4><?php echo wp_trim_words($title, 8); ?></h4>
-             <a href="<?php echo the_permalink(); ?>">View Case Study</a>
-           </div>
+         <div class="col-md-3 post wow fadeInUp" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>) center center; background-size: cover;">
+           <a href="<?php echo the_permalink(); ?>">
+             <div class="post__wrapper">
+               <h4><?php echo wp_trim_words($title, 8); ?></h4>
+               <p class="view" >View Case Study</p>
+             </div>
+            </a>
          </div>
        <?php endwhile; endif; wp_reset_postdata();  ?>
 
