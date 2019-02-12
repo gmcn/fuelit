@@ -1,20 +1,7 @@
-<?php
-
-$args = array(
-'post_parent' => $post->ID,
-'post_type' => 'page',
-'orderby' => 'menu_order',
-'order' => 'ASC'
-);
-
-$child_query = new WP_Query( $args ); ?>
-
-  <?php if ($child_query->have_posts()) : ?>
-
     <div class="container-fluid people">
       <div class="row">
 
-        <?php while ($child_query->have_posts()) : $child_query->the_post();
+        <?php while ( have_posts() ) : the_post();
 
         $job_role = get_field('job_role');
         $menu_order = get_post_field( 'menu_order', $post->ID);
@@ -34,5 +21,3 @@ $child_query = new WP_Query( $args ); ?>
 
       </div>
     </div>
-
-  <?php endif; wp_reset_postdata(); ?>

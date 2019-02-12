@@ -30,12 +30,6 @@ include(locate_template("inc/page-careers/content.php"));
 
 endif;
 
-if ($post->post_parent == '398') :
-
-include(locate_template("inc/page-about/person.php"));
-
-endif;
-
 ?>
 
 

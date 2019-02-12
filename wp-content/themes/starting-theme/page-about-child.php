@@ -19,7 +19,6 @@ get_header(); ?>
 include(locate_template("inc/page-elements/title.php"));
 include(locate_template("inc/page-about/history.php"));
 include(locate_template("inc/page-about/content.php"));
-include(locate_template("inc/page-about/team.php"));
 include(locate_template("inc/page-about/awards.php"));
 include(locate_template("inc/page-about/post-content.php"));
 

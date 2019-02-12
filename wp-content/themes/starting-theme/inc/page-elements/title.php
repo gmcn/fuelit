@@ -9,7 +9,7 @@
       <?php elseif ( $post->post_parent == 142 || $post->post_parent == 398 ) : ?>
         <h1><?php echo get_the_title( wp_get_post_parent_id( get_the_ID() ) ); ?> </h1>
       <?php elseif ( have_posts() ) : ?>
-        <h1><?php single_post_title(); ?></h1>
+        <h1><?php single_post_title(); ?><?php post_type_archive_title(); ?></h1>
       <?php else : ?>
         <h1><?php the_title(); ?></h1>
       <?php endif; ?>

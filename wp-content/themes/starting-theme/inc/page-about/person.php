@@ -9,7 +9,7 @@ $profile_linkedin = get_field('profile_linkedin');
 
  ?>
  <div class="person__backto">
-   <a href="/why-come-to-fuel/our-people/">
+   <a href="/people/">
      <img src="<?php echo get_template_directory_uri(); ?>/images/back_btn.svg" alt="Back to Our People"> Back to Our People
    </a>
  </div>
