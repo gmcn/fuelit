@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,10 @@
  * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
 
 class Ai1wmue_Export_Controller {
 
@@ -47,5 +51,55 @@ class Ai1wmue_Export_Controller {
 			array(),
 			AI1WMUE_TEMPLATES_PATH
 		);
+	}
+
+	public static function exclude_files() {
+		Ai1wm_Template::render(
+			'export/exclude-files',
+			array(),
+			AI1WMUE_TEMPLATES_PATH
+		);
+	}
+
+	public static function list_files() {
+		check_ajax_referer( 'ai1wmue_list', 'security' );
+
+		$folder_path = WP_CONTENT_DIR;
+		if ( ! empty( $_POST['folder'] ) ) {
+			// prevent exploring outside the wp folder
+			$subfolder   = str_replace( '../', '', $_POST['folder'] );
+			$folder_path = sprintf( '%s/%s', $folder_path, $subfolder );
+		}
+		if ( ! is_file( $folder_path ) && ! is_dir( $folder_path ) ) {
+			echo json_encode( array( 'success' => false ) );
+			exit;
+		}
+
+		$files = list_files( $folder_path, 1 );
+
+		$response = array( 'success' => true, 'files' => array() );
+		foreach ( $files as $file ) {
+			$response['files'][] = array(
+				'name'    => wp_basename( $file ),
+				'path'    => trim( str_replace( WP_CONTENT_DIR, '', $file ), '/' ),
+				'toggled' => false, //needed for better reactivity in vue
+				'checked' => false,
+				'type'    => is_dir( $file ) ? 'folder' : 'file',
+				'date'    => human_time_diff( filemtime( $file ) ),
+			);
+		}
+
+		usort( $response['files'], 'Ai1wmue_Export_Controller::sort_by_type_desc_name_asc' );
+		echo json_encode( $response );
+		exit;
+	}
+
+	public static function sort_by_type_desc_name_asc( $first_item, $second_item ) {
+		$sorted_items = strcasecmp( $second_item['type'], $first_item['type'] );
+		if ( $sorted_items !== 0 ) {
+			return $sorted_items;
+		}
+
+		return strcasecmp( $first_item['name'], $second_item['name'] );
 	}
 }

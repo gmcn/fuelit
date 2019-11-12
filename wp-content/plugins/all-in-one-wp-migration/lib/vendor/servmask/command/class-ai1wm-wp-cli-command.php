@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 if ( defined( 'WP_CLI' ) ) {
 	class Ai1wm_WP_CLI_Command extends WP_CLI_Command {
 		public function __invoke() {
 			if ( is_multisite() ) {
-				WP_CLI::error_multi_line( array(
-					__( 'WordPress Multisite is supported via our All in One WP Migration Multisite Extension.', AI1WM_PLUGIN_NAME ),
-					__( 'You can get a copy of it here: https://servmask.com/products/multisite-extension', AI1WM_PLUGIN_NAME ),
-				) );
+				WP_CLI::error_multi_line(
+					array(
+						__( 'WordPress Multisite is supported via our All in One WP Migration Multisite Extension.', AI1WM_PLUGIN_NAME ),
+						__( 'You can get a copy of it here: https://servmask.com/products/multisite-extension', AI1WM_PLUGIN_NAME ),
+					)
+				);
 				exit;
 			}
 
-			WP_CLI::error_multi_line( array(
-				__( 'WordPress CLI is supported via our All in One WP Migration Unlimited Extension.', AI1WM_PLUGIN_NAME ),
-				__( 'You can get a copy of it here: https://servmask.com/products/unlimited-extension', AI1WM_PLUGIN_NAME ),
-			) );
+			WP_CLI::error_multi_line(
+				array(
+					__( 'WordPress CLI is supported via our All in One WP Migration Unlimited Extension.', AI1WM_PLUGIN_NAME ),
+					__( 'You can get a copy of it here: https://servmask.com/products/unlimited-extension', AI1WM_PLUGIN_NAME ),
+				)
+			);
 			exit;
 		}
 	}

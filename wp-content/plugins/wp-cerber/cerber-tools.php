@@ -1,6 +1,7 @@
 <?php
 /*
- 	Copyright (C) 2015-18 CERBER TECH INC., Gregory Markov, https://wpcerber.com
+	Copyright (C) 2015-19 CERBER TECH INC., https://cerber.tech
+	Copyright (C) 2015-19 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL
 
@@ -29,60 +30,6 @@
 
 */
 
-/**
- * Display Tools admin page
- *
- */
-function cerber_tools_page() {
-
-	$tabs = array(
-		'imex'       => array( 'bx-layer', __( 'Export & Import', 'wp-cerber' ) ),
-		'diagnostic' => array( 'bx-wrench', __( 'Diagnostic', 'wp-cerber' ) ),
-		'license'    => array( 'bx-key', __( 'License', 'wp-cerber' ) ),
-		'diag-log'      => array( 'bx-bug', __( 'Log', 'wp-cerber' ) ),
-	);
-
-	$tab = cerber_get_active_tab( $tabs );
-
-	?>
-    <div class="wrap crb-admin">
-
-        <h1><?php _e( 'Tools', 'wp-cerber' ) ?></h1>
-
-		<?php
-
-		cerber_show_tabs( $tab, $tabs );
-
-		cerber_show_aside( 'tools' );
-
-		echo '<div class="crb-main">';
-
-		switch ( $tab ) {
-			case 'diagnostic':
-		        cerber_show_diag();
-		        break;
-	        case 'license':
-		        cerber_show_lic();
-		        break;
-			case 'diag-log':
-				cerber_show_diag_log();
-				break;
-	        case 'help':
-		        cerber_show_help();
-		        break;
-	        default: cerber_show_imex();
-        }
-
-        echo '</div>';
-
-		?>
-	</div>
-	<?php
-}
-
-/*
-	Show Tools screen
-*/
 function cerber_show_imex(){
 	$form = '<h3>'.__('Export settings to the file','wp-cerber').'</h3>';
 	$form .= '<p>'.__('When you click the button below you will get a configuration file, which you can upload on another site.','wp-cerber').'</p>';
@@ -113,10 +60,10 @@ function cerber_export(){
 		wp_die( 'Error!' );
 	}
 	$p = cerber_plugin_data();
-	$data = array('cerber_version' => $p['Version'],'home'=> get_home_url(),'date'=>date('d M Y H:i:s'));
+	$data = array('cerber_version' => $p['Version'],'home'=> cerber_get_home_url(),'date'=>date('d M Y H:i:s'));
 	if (!empty($_GET['exportset'])) {
 	    $data ['options'] = crb_get_settings();
-		$data ['geo-rules'] = cerber_geo_rules();
+		$data ['geo-rules'] = cerber_get_geo_rules();
 	}
 	if ( ! empty( $_GET['exportacl'] ) ) {
 		$data ['acl'] = cerber_acl_all( 'ip, tag, comments' );
@@ -159,17 +106,22 @@ function cerber_import() {
 
 			if ( $_POST['importset'] && $data['options'] && ! empty( $data['options'] ) && is_array( $data['options'] ) ) {
 				$data['options']['loginpath'] = urldecode( $data['options']['loginpath'] ); // needed for filter cerber_sanitize_m()
-				if ( $data['home'] != get_home_url() ) {
+				if ( $data['home'] != cerber_get_home_url() ) {
 					$data['options']['sitekey']   = $wp_cerber->getSettings( 'sitekey' );
 					$data['options']['secretkey'] = $wp_cerber->getSettings( 'secretkey' );
 				}
-				cerber_save_options( $data['options'] ); // @since 2.0
+				cerber_save_settings( $data['options'] ); // @since 2.0
 				if ( isset( $data['geo-rules'] ) ) {
 					update_site_option( 'geo_rule_set', $data['geo-rules'] );
 				}
+				if ( ! empty( $data['options']['crb_role_policies'] ) ) {
+					update_site_option( CERBER_SETTINGS, array( 'crb_role_policies' => $data['options']['crb_role_policies'] ) );
+				}
 			}
 
-			if ( $_POST['importacl'] && $data['acl'] && is_array( $data['acl'] ) && ! empty( $data['acl'] ) ) {
+			if ( isset( $_POST['importacl'] )
+			     && ! empty( $data['acl'] )
+			     && is_array( $data['acl'] ) ) {
 				$acl_ok = true;
 				if ( false === $wpdb->query( "DELETE FROM " . CERBER_ACL_TABLE ) ) {
 					$acl_ok = false;
@@ -188,7 +140,7 @@ function cerber_import() {
 				}
 			}
 
-			cerber_upgrade_options(); // In case it was settings from an older version
+			cerber_upgrade_settings(); // In case it was settings from an older version
 
 			cerber_admin_message( __( 'Settings has imported successfully from', 'wp-cerber' ) . ' ' . $_FILES['ifile']['name'] );
 		}
@@ -231,19 +183,24 @@ function cerber_show_diag(){
         <div class="diag-section">
             <h3>Database Info</h3>
 			<?php echo cerber_db_diag(); ?>
-			<?php echo '<p style="text-align: right;"><a class="button button-secondary" href="' . wp_nonce_url( add_query_arg( array( 'force_repair_db' => 1 ) ), 'control', 'cerber_nonce' ) . '"><span class="dashicons dashicons-admin-tools" style="vertical-align: middle;"></span> Repair tables</a></p>'; ?>
+			<?php echo '<p style="text-align: right;"><a class="button button-secondary" href="' . wp_nonce_url( add_query_arg( array( 'force_repair_db' => 1 ) ), 'control', 'cerber_nonce' ) . '"><span class="dashicons dashicons-admin-tools" style="vertical-align: middle;"></span> Repair Cerber\'s Tables</a></p>'; ?>
         </div>
         <div class="diag-section">
-            <h3>Server Info</h3>
-            <textarea name="dia" class="code"><?php
-				echo 'PHP version: ' . phpversion() . "\n";
-				$server = $_SERVER;
-				unset($server['HTTP_COOKIE']);
-				foreach ( $server as $key => $value ) {
-					echo '[' . $key . '] => ' . @strip_tags( $value ) . "\n";
-				}
-				?>
-			</textarea>
+            <h3>Server Environment Variables</h3>
+		    <?php
+		    $server = $_SERVER;
+		    if ( ! empty( $server['HTTP_COOKIE'] ) ) {
+			    unset( $server['HTTP_COOKIE'] );
+		    }
+		    if ( ! empty( $server['HTTP_X_COOKIES'] ) ) {
+			    unset( $server['HTTP_X_COOKIES'] );
+		    }
+		    $se = array();
+		    foreach ( $server as $key => $value ) {
+			    $se[] = array( $key, @strip_tags( $value ) );
+		    }
+		    echo cerber_make_plain_table( $se );
+		    ?>
         </div>
         <div class="diag-section">
             <h3>Cerber Security Cloud Status</h3>
@@ -251,13 +208,13 @@ function cerber_show_diag(){
 			echo lab_status();
 			?>
             <p style="text-align: right;">
-                <a class="button button-secondary" href="<?php echo wp_nonce_url( add_query_arg( array( 'clean_up_the_cache' => 1 ) ), 'control', 'cerber_nonce' ); ?>">Clean up the cache</a>
-                <a class="button button-secondary" href="<?php echo wp_nonce_url( add_query_arg( array( 'force_check_nodes' => 1 ) ), 'control', 'cerber_nonce' ); ?>">Force recheck nodes</a>
+                <a class="button button-secondary" href="<?php echo wp_nonce_url( add_query_arg( array( 'clean_up_the_cache' => 1 ) ), 'control', 'cerber_nonce' ); ?>">Clear Up Cache</a>
+                <a class="button button-secondary" href="<?php echo wp_nonce_url( add_query_arg( array( 'force_check_nodes' => 1 ) ), 'control', 'cerber_nonce' ); ?>">Recheck Node Statuses</a>
             </p>
         </div>
 	    <?php
 
-        echo '<div class="diag-section"><h3>Cron</h3>';
+        echo '<div class="diag-section"><h3>Maintenance Tasks</h3>';
 	    cerber_cron_diag();
 	    echo '</div>';
 
@@ -283,6 +240,15 @@ function cerber_show_diag(){
 		    echo '</ol>';
 		    echo '</div>';
 	    }
+
+	    if ( $status = CRB_DS::get_status() ) {
+		    echo '
+            <div class="diag-section">
+            <h3>Data Shield Status</h3>';
+		    echo $status;
+		    echo '</div>';
+	    }
+
 	    ?>
     </form>
     <script type="text/javascript">
@@ -302,11 +268,14 @@ function cerber_show_lic() {
 	$valid = '';
 	if ( ! empty( $key[2] ) ) {
 		$lic = $key[2];
-		if ( $expires = lab_validate_lic( $lic ) ) {
-			$valid = '<span style="color: green;">This key is valid until '.$expires.'</span>';
+		if ( lab_validate_lic( $lic, $expires ) ) {
+			$valid = '
+                <p><span style="color: green;">This key is valid until ' . $expires . '</span></p>
+                <p>To move the key to another website or web server, please follow these steps: <a href="https://my.wpcerber.com/how-to-move-license-key/" target="_blank">https://my.wpcerber.com/how-to-move-license-key/</a></p>';
 		}
 		else {
-			$valid = '<span style="color: red;">This license key is invalid or expired</span>';
+			$valid = '<p><span style="color: red;">This license key is invalid or expired ' . $expires . '</span></p>
+			<p>If you believe this key is valid, please follow these steps: <a href="https://my.wpcerber.com/how-to-fix-invalid-or-expired-key/" target="_blank">https://my.wpcerber.com/how-to-fix-invalid-or-expired-key/</a></p>';
 		}
 	}
 	else {
@@ -317,23 +286,24 @@ function cerber_show_lic() {
         <table class="form-table">
             <tbody>
             <tr>
-                <th scope="row">License key for PRO version</th>
+                <th scope="row">License key for the PRO version</th>
                 <td>
-                    <input name="cerber_license" style="font-family: Menlo, Consolas, Monaco, monospace;" value="<?php echo $lic; ?>" size="<?php echo LAB_KEY_LENGTH; ?>" maxlength="<?php echo LAB_KEY_LENGTH; ?>" type="text">
-                    <?php echo '<p>'.$valid.'</p>'; ?>
+                    <input name="cerber_license" value="<?php echo $lic; ?>" size="<?php echo LAB_KEY_LENGTH; ?>" maxlength="<?php echo LAB_KEY_LENGTH; ?>" type="text" class="crb-monospace" placeholder="Enter the license key here">
+                    <?php echo $valid; ?>
                 </td>
             </tr>
             <tr>
                 <th scope="row">Site ID</th>
                 <td>
-		            <?php echo '<p style="font-family: Menlo, Consolas, Monaco, monospace;">'.$key[0].'</p>'; ?>
+		            <?php echo '<p class="crb-monospace">'.$key[0].'</p>'; ?>
                 </td>
             </tr>
             <tbody>
         </table>
         <div style="padding-left: 220px">
+            <input type="hidden" name="cerber_admin_do" value="install_key">
 			<?php
-			wp_nonce_field('control','cerber_nonce');
+			cerber_nonce_field( 'control', true );
             submit_button();
             ?>
         </div>
@@ -348,16 +318,51 @@ function cerber_show_wp_diag(){
 
 	$ret = array();
 
-	$ret[] = cerber_make_plain_table( array(
-		array( 'Server ', $_SERVER['SERVER_SOFTWARE'] ),
-		array( 'PHP version ', phpversion() ),
-		array( 'Server API ', php_sapi_name() ),
-		array( 'WordPress version', cerber_get_wp_version() ),
-		array( 'Options DB table', $wpdb->prefix . 'options' ),
+	$tz = date_default_timezone_get();
+	$tz = ( $tz !== 'UTC' ) ? '<span style="color: red;">' . $tz . '!</span>' : $tz;
+
+	$sys = array(
+		array( 'Web Server', $_SERVER['SERVER_SOFTWARE'] ),
+		array( 'PHP version', phpversion() ),
+		array( 'Server API', php_sapi_name() ),
 		array( 'Server platform', PHP_OS ),
 		array( 'Memory limit', @ini_get( 'memory_limit' ) ),
-		array( 'Default PHP timezone', date_default_timezone_get() )
-	) );
+		array( 'Default PHP timezone', $tz ),
+		array( 'WordPress version', cerber_get_wp_version() ),
+		array( 'WordPress locale', get_locale() ),
+		array( 'WordPress options DB table', $wpdb->prefix . 'options' ),
+	);
+
+	if ( 2 < substr_count( cerber_get_site_url(), '/' ) ) {
+		$sys[] = array( 'Subfolder WP installation', 'YES' );
+	}
+
+	if ( nexus_is_valid_request() ) {
+		$sys[] = array( 'The IP address of the master is detected as', cerber_get_remote_ip() );
+	}
+	else {
+		$sys[] = array( 'Your IP address is detected as', cerber_get_remote_ip() . ' (<a href="https://wpcerber.com/what-is-my-ip/" target="_blank">check it on the what is my IP address page</a>)' );
+	}
+
+	$ret[] = cerber_make_plain_table( $sys );
+
+	$folder = cerber_get_the_folder();
+	if ( is_wp_error( $folder ) ) {
+		$folder = $folder->get_error_message();
+	}
+	else {
+		$folder .= 'quarantine' . DIRECTORY_SEPARATOR;
+	}
+
+	if ( file_exists( ABSPATH . 'wp-config.php' )) {
+		$config = ABSPATH . 'wp-config.php';
+	}
+    elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) ) {
+		$config = dirname( ABSPATH ) . '/wp-config.php';
+	}
+	else {
+		$config = 'None?';
+	}
 
 	$folders = array(
 		array( 'WordPress root folder (ABSPATH) ', ABSPATH ),
@@ -366,23 +371,15 @@ function cerber_show_wp_diag(){
 		array( 'WordPress plugins folder', cerber_get_plugins_dir() ),
 		array( 'WordPress themes folder', cerber_get_themes_dir() ),
 		array( 'WordPress must use plugin folder (WPMU_PLUGIN_DIR) ', WPMU_PLUGIN_DIR ),
+		array( 'WordPress config file', $config ),
 		array( 'PHP folder for uploading files', ini_get( 'upload_tmp_dir' ) ),
 		array( 'Server folder for temporary files', sys_get_temp_dir() ),
 		array( 'Server folder for user session data', session_save_path() ),
-		array( 'Security scanner quarantine folder', cerber_get_the_folder() . 'quarantine' . DIRECTORY_SEPARATOR ),
+		array( 'Cerber\'s quarantine folder', $folder ),
 		array( 'Cerber\'s diagnostic log', cerber_get_diag_log() )
 	);
 
-	if ( file_exists( ABSPATH . 'wp-config.php' )) {
-	    $config = ABSPATH . 'wp-config.php';
-	}
-    elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) ) {
-		$config = dirname( ABSPATH ) . '/wp-config.php';
-	}
-	else {
-		$config = 'None?';
-    }
-	$folders[] = array( 'WordPress config file', $config );
+	//$folders[] = array( 'WordPress config file', $config );
 
 	if ( file_exists( ABSPATH . '.htaccess' ) ) {
 		$folders[] = array( 'Main .htaccess file', ABSPATH . '.htaccess' );
@@ -434,17 +431,27 @@ function cerber_show_wp_diag(){
 		$pls[] = array($data['Name'], $data['Version']);
 	}
 
-	$ret[] = 'Active plugins<br>'.cerber_make_plain_table( $pls );
+	$ret[] = '<p>Active plugins</p>' . cerber_make_plain_table( $pls );
 
-	echo implode("<br>",$ret);
+	echo implode("\n",$ret);
 }
 
-function cerber_make_plain_table( $data ) {
-	$ret = '<table class="crb-plain-table">';
+function cerber_make_plain_table( $data, $header = null, $first_header = false, $eq = false ) {
+	$class = 'crb-monospace ';
+	if ( $first_header ) {
+		$class .= ' crb-plain-fh ';
+	}
+	if ( ! $eq ) {
+		$class .= ' crb-plain-fcw ';
+	}
+	$ret = '<div class="crb-plain-table"><table class="' . $class . '">';
+	if ( $header ) {
+		$ret .= '<tr class="crb-plain-header"><td>' . implode( '</td><td>', $header ) . '</td></tr>';
+	}
 	foreach ( $data as $row ) {
 		$ret .= '<tr><td>' . implode( '</td><td>', $row ) . '</td></tr>';
 	}
-	$ret .= '</table>';
+	$ret .= '</table></div>';
 
 	return $ret;
 }
@@ -459,27 +466,39 @@ function cerber_get_chmod( $file ) {
  *
  */
 function cerber_db_diag(){
-	global $wp_cerber;
+    global $wpdb;
+
 	$ret = array();
 
-	$ret[]= 'Database name: '.DB_NAME;
+	$db_info = array();
 
-	$var = crb_get_mysql_var('innodb_buffer_pool_size');
-	$pool_size = round($var / 1048576);
-	$inno = 'InnoDB buffer pool size: <b>'.$pool_size.' MB</b>';
-	if ($pool_size < 16) $inno .= ' Your pool size is extremely small!';
-    elseif ($pool_size < 64) $inno .= ' It seems your pool size is too small.';
-	$ret[]= $inno;
+	$db_info[] = array( 'Database name', DB_NAME );
 
-	$var = crb_get_mysql_var('max_allowed_packet');
-	$ret[]= 'Max allowed packet size: <b>'.round($var / 1048576).' MB</b>';
+	$var       = crb_get_mysql_var( 'innodb_buffer_pool_size' );
+	$pool_size = round( $var / 1048576 );
+	$inno      = $pool_size . ' MB';
+	if ( $pool_size < 16 ) {
+		$inno .= ' Your pool size is extremely small!';
+	}
+    elseif ( $pool_size < 64 ) {
+		$inno .= ' It seems your pool size is too small.';
+	}
+	$db_info[] = array( 'InnoDB buffer pool size', $inno );
 
-	$ret[]= cerber_table_info(CERBER_LOG_TABLE);
-	$ret[]= cerber_table_info(CERBER_ACL_TABLE);
-	$ret[]= cerber_table_info(CERBER_BLOCKS_TABLE);
-	$ret[]= cerber_table_info(CERBER_TRAF_TABLE);
+	$var   = crb_get_mysql_var( 'max_allowed_packet' );
+	$db_info[] = array( 'Max allowed packet size', round( $var / 1048576 ) . ' MB' );
 
-	if ( $wp_cerber->getRemoteIp() === CERBER_NO_REMOTE_IP ) {
+	$db_info[] = array( 'Charset', $wpdb->charset );
+	$db_info[] = array( 'Collate', $wpdb->collate );
+
+	$ret[] = cerber_make_plain_table($db_info);
+
+	$ret[] = cerber_table_info( CERBER_LOG_TABLE );
+	$ret[] = cerber_table_info( CERBER_ACL_TABLE );
+	$ret[] = cerber_table_info( CERBER_BLOCKS_TABLE );
+	$ret[] = cerber_table_info( CERBER_TRAF_TABLE );
+
+	if ( cerber_get_remote_ip() === CERBER_NO_REMOTE_IP ) {
 		$ret[] = '<p style="color: #DF0000;">It seems that we are unable to get IP addresses.</p>';
 	}
 
@@ -489,7 +508,7 @@ function cerber_db_diag(){
 		update_site_option( '_cerber_db_errors', '' );
 	}
 
-	return $err.implode('<br>',$ret);
+	return $err . implode( '<br />', $ret );
 }
 
 /**
@@ -506,24 +525,29 @@ function cerber_table_info( $table ) {
 	}
 	$cols = $wpdb->get_results( "SHOW FULL COLUMNS FROM " . $table );
 
-	$columns    = '<table><tr><th style="width: 30%">Field</th><th style="width: 30%">Type</th><th style="width: 30%">Collation</th></tr>';
+	$tb = array();
+	//$columns    = '<table><tr><th style="width: 30%">Field</th><th style="width: 30%">Type</th><th style="width: 30%">Collation</th></tr>';
 	foreach ( $cols as $column ) {
 		$column    = obj_to_arr_deep( $column );
 		$field     = array_shift( $column );
 		$type      = array_shift( $column );
 		$collation = array_shift( $column );
-		$columns  .= '<tr><td><b>' . $field . '<b></td><td>' . $type . '</td><td>' . $collation . '</td></tr>';
+		$tb[] = array( $field, $type, $collation );
+
+		//$columns  .= '<tr><td><b>' . $field . '</b></td><td>' . $type . '</td><td>' . $collation . '</td></tr>';
 	}
-	$columns .= '</table>';
+	//$columns .= '</table>';
+
+	$columns = cerber_make_plain_table( $tb, array( 'Field', 'Type', 'Collation' ) );
 
 	$rows = absint( cerber_db_get_var( 'SELECT COUNT(*) FROM ' . $table ) );
 
 	$sts = $wpdb->get_row( 'SHOW TABLE STATUS WHERE NAME = "' . $table .'"');
-	$status = '<table>';
+	$tb = array();
 	foreach ( $sts as $key => $value ) {
-		$status .= '<tr><td><b>' . $key . '<b></td><td>' . $value . '</td></tr>';
+		$tb[] = array( $key, $value );
 	}
-	$status .= '</table>';
+	$status = cerber_make_plain_table( $tb, null, true );
 
 	$truncate = '';
 	if ($rows) {
@@ -536,8 +560,8 @@ function cerber_table_info( $table ) {
 
 function cerber_environment_diag() {
 	$issues = array();
-	if ( version_compare( '5.6', phpversion(), '>' ) ) {
-		$issues[] = 'Your site run on the outdated version of PHP ' . phpversion() . '. We strongly encourage you to upgrade it to a newer version of PHP.';
+	if ( version_compare( '7.0', phpversion(), '>' ) ) {
+		$issues[] = 'Your site run on an outdated (unsupported) version of PHP which is ' . phpversion() . '. We strongly encourage you to upgrade it to a newer version of PHP. See more at: <a target="_blank" href="http://php.net/supported-versions.php">http://php.net/supported-versions.php</a>';
 	}
 	if ( ! function_exists( 'http_response_code' ) ) {
 		$issues[] = 'The PHP function http_response_code() is not found or disabled.';
@@ -554,7 +578,7 @@ function cerber_environment_diag() {
 	if ( $issues ) {
 		$issues = '<p>' . implode( '</p><p>', $issues ) . '</p>';
 		$ret = array(
-			'<h3><span style="color: red;" class="dashicons dashicons-warning"></span> Some issues detected. They can affect plugin functionality.</h3>',
+			'<h3><span style="color: red;" class="dashicons dashicons-warning"></span> Some issues detected. They might affect plugin functionality.</h3>',
 			$issues
 		);
 	}
@@ -563,22 +587,85 @@ function cerber_environment_diag() {
 }
 
 function cerber_cron_diag() {
-	$c1 = ( date( 'G' ) - intval( get_site_transient( 'crb_hourly_1' ) ) );
-	$c2 = ( date( 'G' ) - intval( get_site_transient( 'crb_hourly_2' ) ) );
-	$c3 = ( date( 'j' ) - intval( get_site_transient( 'crb_daily_1' ) ) );
-	$err = array();
-	if ( $c1 > 1 || $c2 > 1 ) {
-		$err[] = 'Scheduled hourly cron tasks are not executed properly.';
+
+	$planned   = array();
+	$crb_crons = array(
+		'cerber_hourly_1'    => 'Hourly task #1',
+		'cerber_hourly_2'    => 'Hourly task #2',
+		'cerber_daily'       => 'Daily task',
+		//'cerber_bg_launcher' => 'Background tasks'
+	);
+	foreach ( _get_cron_array() as $time => $item ) {
+		foreach ( $crb_crons as $key => $val ) {
+			if ( ! empty( $item[ $key ] ) ) {
+				$planned[ $key ] = $val . ' scheduled for ' . cerber_date( $time ) . ' (' . cerber_ago_time( $time ) . ')';
+			}
+		}
 	}
-	if ( $c3 > 1 ) {
-		$err[] = 'Scheduled daily cron task is not executed properly.';
+
+	unset( $crb_crons['cerber_daily'] );
+	$crb_crons['cerber_daily_1'] = 'Daily task';
+
+	$errors  = array();
+	$ok      = array();
+	$no_cron = false;
+	foreach ( $crb_crons as $key => $task ) {
+		$h = get_site_transient( $key );
+		if ( ! $h || ! is_array( $h ) ) {
+			$errors[] = $task . ' has never been executed';
+			if ( $oldest = cerber_db_get_var( 'SELECT MIN(stamp) FROM ' . CERBER_LOG_TABLE ) ) {
+				if ( $oldest < ( time() - 24 * 3600 ) ) {
+					$no_cron = true;
+				}
+			}
+			continue;
+		}
+		if ( empty( $h[1] ) ) {
+			$errors[] = $task . ' has not finished correctly';
+			continue;
+		}
+		$end = $h[1];
+		/*
+		if ( $end < ( time() - 2 * 3600 ) ) {
+			$errors[] = $val . ' has been executed ' . cerber_ago_time( $end );
+		}
+		else {
+			$ok[] = $val . ' has been executed ' . cerber_ago_time( $end );
+		}
+		*/
+		$dur = $end - $h[0];
+		if ( $dur > 60 ) {
+			$errors[] = $task . ' has been executed ' . cerber_ago_time( $end ) . ' and it took ' . $dur . ' seconds.';
+		}
+		else {
+			$ok[] = $task . ' has been executed ' . cerber_ago_time( $end ) . ' and it took ' . $dur . ' seconds.';
+		}
 	}
-	if ( $err ) {
-		echo '<p style="color: red;">' . implode( '<br/>', $err ) . '</p>';
+
+	if ( $errors ) {
+		//echo 'There are some errors';
+		echo '<p style="color: red;">' . implode( '<br/>', $errors ) . '</p>';
 	}
-	else {
-		echo 'No issues detected.';
+	if ( $ok ) {
+		echo '<p>' . implode( '<br/>', $ok ) . '</p>';
 	}
+	if ( $planned ) {
+		echo '<p>' . implode( '<br/>', $planned ) . '</p>';
+	}
+
+	$num = 0;
+	if ( $bg = cerber_get_set( '_background_tasks' ) ) {
+		$num = count( $bg );
+	}
+	echo '<p>Background tasks: ' . $num . '</p>';
+
+	if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+		echo '<p>Note: the internal WordPress cron launcher is disabled on this site.</p>';
+		if ( $no_cron ) {
+			echo '<p>An external cron launcher has not been configured or does not work properly.</p>';
+		}
+	}
+
 }
 
 function cerber_show_diag_log() {
@@ -589,22 +676,32 @@ function cerber_show_diag_log() {
 		return;
 	}
 	if ( ! filesize( $file ) ) {
-		echo 'The log file is empty.';
+		echo 'The diagnostic log file is empty.';
 
 		return;
 	}
 
-	$confirm = ' onclick="return confirm(\'' . __( 'Are you sure?', 'wp-cerber' ) . '\');"';
-	$clear   = '<a ' . $confirm . ' href="' . wp_nonce_url( add_query_arg( array(
-			'crb_diag_log' => 'clear_it',
-		) ), 'control', 'cerber_nonce' ) . '">Clear the log</a>';
-	$dnl     = '<a href="' . wp_nonce_url( add_query_arg( array(
-			'crb_diag_log' => 'download',
-		) ), 'control', 'cerber_nonce' ) . '">Download as a file</a>';
-	$link    = '<a href="' . cerber_admin_link( 'diag-log', array( 'order' => 'reverse' ) ) . '">Reverse the order</a>';
-	$nav     = '<div style="text-align: right; padding-bottom: 1em;">' . $link . ' | ' . $dnl . ' | ' . $clear . '</div>';
+	$get  = crb_get_query_params();
 
-	if ( ! isset( $_GET['order'] ) ) {
+	$confirm = ' onclick="return confirm(\'' . __( 'Are you sure?', 'wp-cerber' ) . '\');"';
+
+	$clear = '<a ' . $confirm . ' href="' . cerber_admin_link_add( array(
+			'cerber_admin_do' => 'manage_diag_log',
+			'do_this'         => 'clear_it',
+		) ) . '">Clear the log</a>';
+
+	$dnl = '<a href="' . cerber_admin_link_add( array(
+			'cerber_admin_do' => 'export',
+			'type'            => 'get_diag_log',
+		) ) . '">Download as a file</a>';
+
+	$reverse = '<a href="' . cerber_admin_link_add( array(
+			'reverse_log' => ( crb_array_get( $get, 'reverse_log' ) ) ? 0 : 1,
+		), false ) . '">Reverse the order</a>';
+
+	$nav     = '<div style="text-align: right; padding-bottom: 1em;">' . $reverse . ' | ' . $dnl . ' | ' . $clear . '</div>';
+
+	if ( empty( $get['reverse_log'] ) ) {
 		$log  = @fopen( $file, 'r' );
 		$text = fread( $log, 10000000 );
 		if ( ! $text ) {
@@ -632,15 +729,44 @@ function cerber_show_diag_log() {
 }
 
 function cerber_manage_diag_log( $v ) {
-    if ($v == 'clear_it' ){
-	    cerber_truncate_log(0);
-    }
+	if ( $v == 'clear_it' ) {
+		cerber_truncate_log( 0 );
+	}
     elseif ( $v == 'download' ) {
-	    header( $_SERVER["SERVER_PROTOCOL"] . ' 200 OK' );
-	    header( "Content-type: application/force-download" );
-	    header( "Content-Type: application/octet-stream" );
-	    header( "Content-Disposition: attachment; filename=wpcerber.log" );
-	    readfile( cerber_get_diag_log() );
-	    exit;
-    }
+		header( $_SERVER["SERVER_PROTOCOL"] . ' 200 OK' );
+		header( "Content-type: application/force-download" );
+		header( "Content-Type: application/octet-stream" );
+		header( "Content-Disposition: attachment; filename=wpcerber.log" );
+		readfile( cerber_get_diag_log() );
+		exit;
+	}
+}
+
+function cerber_show_change_log() {
+	if ( ! $text = file( cerber_get_plugins_dir() . '/wp-cerber/changelog.txt' ) ) {
+		echo 'File changelog.txt not found';
+
+		return;
+	}
+
+	echo '<div id="crb-change-log-view">';
+	foreach ( $text as $line ) {
+		$line = htmlspecialchars( $line );
+		if ( preg_match_all( '/(\[.+?\])(\(.+?\))/', $line, $m ) ) {
+			$anchors = $m[1];
+			$links   = $m[2];
+			$replace = array();
+			foreach ( $anchors as $i => $anchor ) {
+				$replace[] = '<a href="' . trim( $links[ $i ], '()' ) . '" target="_blank">' . trim( $anchor, '[]' ) . '</a>';
+			}
+			$line = str_replace( $anchors, $replace, $line );
+			$line = str_replace( $links, '', $line );
+		}
+		if ( preg_match( '/=([\d\.\s]+?)=/', $line, $m ) ) {
+			$line = str_replace( $m[0], '<span class="crb-version">' . $m[1] . '</span>', $line );
+		}
+
+		echo $line . '<br/>';
+	}
+	echo '</div>';
 }
