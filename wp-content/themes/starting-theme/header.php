@@ -40,7 +40,11 @@
 				</div>
 				<div class="col-xs-6 support">
 
-					<a href="https://get.teamviewer.com/tdq85xc" target="_blank"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/support-icon.png" alt="Live Support">Live <span>Support</span></a>
+
+					<?php $support_url = get_field('support_url', 2453); ?>
+
+
+					<a href="/support/"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/support-icon.png" alt="Live Support">Live <span>Support</span></a>
 
 				</div>
 			</div>
@@ -60,7 +64,8 @@
 						<div class="col-md-6">
 							<h3>Main Navigation</h3>
 							<?php wp_nav_menu( array(
-								'theme_location' => 'menu-1' ) );
+								'theme_location' => 'menu-1',
+								'menu_class' => 'accordion' ) );
 								?>
 						</div>
 
