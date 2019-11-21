@@ -129,9 +129,7 @@ span.open {
     }
     ul ul {
       margin-left: 15px;
-      @include md {
-        display: none;
-      }
+      display: none;
       a {
         @include md {
           font-size: 20px;
@@ -151,10 +149,6 @@ span.open {
           font-size: 20px;
           font-weight: 400;
         }
-        -moz-transition: all .3s linear;
-    -o-transition: all .3s linear;
-    transition: all .3s linear;
-    -webkit-transition: all .3s linear;
         color: #00A3E6;
         text-decoration: none;
         font-size: 16px;
@@ -165,10 +159,10 @@ span.open {
       display: block
     }
     ul li ul {
-      transition: 0.5s;
+      // transition: 0.5s;
     }
     ul li:hover ul {
-      display: block;
+      // display: block;
     }
     img {
       height: 25px;
