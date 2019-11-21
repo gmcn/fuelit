@@ -8,7 +8,7 @@
 
          ?>
 
-          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 people__person wow fadeInLeft" style="color: <?php echo $pageColour ?>">
+          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 people__person matchheight wow fadeInLeft" style="color: <?php echo $pageColour ?>">
             #<?php if ($menu_order < 10): ?>0<?php endif; ?><?php echo $menu_order ?>
             <h2>
               <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="color: <?php echo $pageColour ?>"><?php the_title(); ?></a>
