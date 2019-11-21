@@ -13,9 +13,9 @@ $taxterms = get_the_terms( $post->ID, array(
 'taxonomy' => 'products_tag',
 ) );
 
-foreach ($taxterms as $taxterm) {
-  // echo $taxterm->slug;
-}
+// foreach ($taxterms as $taxterm) {
+//   echo $taxterm->slug;
+// }
 
 $term_list = wp_get_post_terms($post->ID, 'products_tag', array("fields" => "names"));
 
@@ -97,5 +97,14 @@ $term_list = wp_get_post_terms($post->ID, 'products_tag', array("fields" => "nam
   include(locate_template("inc/page-elements/call-back.php"));
   include(locate_template("inc/page-elements/dynamic-projects.php"));
   ?>
+
+  <div class="back">
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="15.084" height="18.322" viewBox="0 0 15.084 18.322">
+      <path id="Path_21506" data-name="Path 21506" d="M2239.043,11588.454l-9.084,6.161,9.084,6.161Z" transform="translate(-2226.959 -11585.454)" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    </svg>
+    <a href="/products/">Back To What We Offer</a>
+
+  </div>
 
 </div>
