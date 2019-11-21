@@ -359,7 +359,7 @@ function case_studies_taxonomies()
 function products_post_type() {
 
 	$labels = array(
-		'name'                  => _x( 'Products', 'Post Type General Name', 'text_domain' ),
+		'name'                  => _x( 'Product Portfolio', 'Post Type General Name', 'text_domain' ),
 		'singular_name'         => _x( 'Product', 'Post Type Singular Name', 'text_domain' ),
 		'menu_name'             => __( 'Products', 'text_domain' ),
 		'name_admin_bar'        => __( 'Product', 'text_domain' ),
