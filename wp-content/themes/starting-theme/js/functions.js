@@ -38,6 +38,18 @@
 		$(".fancybox").fancybox();
 	});
 
+  $('.accordion > li > a').click(function(){
+    if ($(this).attr('class') != 'active'){
+      $('.accordion li ul').slideUp();
+      $(this).next().slideToggle();
+      $('.accordion li a').removeClass('active');
+      $(this).addClass('active');
+    } else {
+      $('.accordion li ul').slideUp();
+      $('.accordion li a').removeClass('active');
+    }
+  });
+
 } ) (jQuery);
 
 /* Open when someone clicks on the span element */
