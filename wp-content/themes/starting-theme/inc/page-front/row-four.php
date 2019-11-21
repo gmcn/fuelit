@@ -42,7 +42,7 @@
             $partner_name = get_sub_field('partner_name');
             ?>
 
-            <div class="col-md-2 partnerheight">
+            <div class="col-xs-6 col-md-2 partnerheight">
 
               <img src="<?php echo $partner_logo ?>" alt="<?php echo $partner_name ?>">
 
