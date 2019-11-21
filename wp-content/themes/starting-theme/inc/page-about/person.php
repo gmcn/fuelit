@@ -28,33 +28,37 @@ $profile_linkedin = get_field('profile_linkedin');
       </div>
 
       <div class="row person__contact">
-        <div class="col-sm-6 col-md-6 col-lg-4 profile__social matchheight">
-          <p>Follow/Friend me on social media:</p>
+        <?php if ($profile_facebook || $profile_twitter || $profile_linkedin) : ?>
+          <div class="col-sm-6 col-md-6 col-lg-4 profile__social matchheight">
+            <p>Follow/Friend me on social media:</p>
 
-          <?php if ($profile_facebook): ?>
-            <a href="<?php echo $profile_facebook; ?>" target="_blank">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/profile_facebook.svg" alt="Follow <?php the_title(); ?> on Facebook">
-            </a>
-          <?php endif; ?>
+            <?php if ($profile_facebook): ?>
+              <a href="<?php echo $profile_facebook; ?>" target="_blank">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/profile_facebook.svg" alt="Follow <?php the_title(); ?> on Facebook">
+              </a>
+            <?php endif; ?>
 
-          <?php if ($profile_twitter): ?>
-            <a href="<?php echo $profile_twitter; ?>" target="_blank">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/profile_twitter.svg" alt="Follow <?php the_title(); ?> on Twitter">
-            </a>
-          <?php endif; ?>
+            <?php if ($profile_twitter): ?>
+              <a href="<?php echo $profile_twitter; ?>" target="_blank">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/profile_twitter.svg" alt="Follow <?php the_title(); ?> on Twitter">
+              </a>
+            <?php endif; ?>
 
-          <?php if ($profile_linkedin): ?>
-            <a href="<?php echo $profile_linkedin; ?>" target="_blank">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/profile_linkedin.svg" alt="Follow <?php the_title(); ?> on Linkedin">
-            </a>
-          <?php endif; ?>
+            <?php if ($profile_linkedin): ?>
+              <a href="<?php echo $profile_linkedin; ?>" target="_blank">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/profile_linkedin.svg" alt="Follow <?php the_title(); ?> on Linkedin">
+              </a>
+            <?php endif; ?>
 
-        </div>
+          </div>
+        <?php endif; ?>
 
+        <?php if ($profile_email) : ?>
         <div class="col-sm-6 col-md-6 col-lg-4 profile__email matchheight">
           <p>Email us now:</p>
           <a href="mailto:<?php echo $profile_email; ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/profile_email.svg" alt="Email <?php the_title(); ?>"></a>
         </div>
+        <?php endif; ?>
       </div>
 
     </div>
