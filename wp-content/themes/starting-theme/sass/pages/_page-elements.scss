@@ -84,19 +84,24 @@
     padding-right: 7.5px;
   }
   input.wpcf7-form-control {
-    height: 78px;
+    height: 50px;
     padding: 0 15px;
     margin-bottom: 15px;
+    font-weight: 600;
+  }
+  span {
+    font-weight: 300;
+    font-size: 11px;
   }
   a {
     margin-top: 15px;
     display: inline-block;
-    color: #fff;
+    color: rgba(255, 255, 255, .4);
     font-weight: 700;
     transition: .5s;
   }
   a:hover {
-    color: #e53c79;
+    color: #fff;
     text-decoration: none;
   }
   .consent {

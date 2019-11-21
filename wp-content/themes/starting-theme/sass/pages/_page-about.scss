@@ -166,6 +166,8 @@
     }
     img {
       transition: .5s;
+      vertical-align:bottom;
+      float: left;
     }
     &:hover {
       img {
