@@ -62,9 +62,11 @@
       }
     }
     .partners {
-      height: 300px;
+      @include md {
+        height: 300px;
+        width: calc(61% + 2px);
+      }
       background: #3C3C3C;
-      width: calc(61% + 2px);
       color: #fff;
       text-align: center;
       .row, .col-md-2{
